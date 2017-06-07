@@ -1,64 +1,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="Zealite_popup" data-ng-csp>
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="_popup" data-ng-csp>
 	<head>
 		<title>Zealite.net forums - (x20) Chrome.Ext</title>
 		<meta charset="UTF-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"> 
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" /> 
 		<link href="/ext.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="/angular.min.js"></script>
-		<script type="text/javascript" src="/ext.js"></script>
-		<base target="_blank">
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="ext.js"></script>
+		<base target="_blank" />
 	</head>
 	<body bgcolor="{{color?'#'+color:'#FFFFFF'}}" class="zealite" data-ng-controller="PopupCtrl" ng-cloak>
 		<table class="body-wrap"> 
 			<tr> 
 				<td class="container"> 
-					<div class="content">
-						<div data-ng-view data-ng-if="users>=0">На {{server}} сейчас (ЛЕТО) - {{users}} игроков<br /></div>
-						<a href="http://forum.zealite.net/showthread.php?tid=2333" title="x20 Южный Альянс">Южный Альянс (x20)</a><br />
-						<a href="http://forum.zealite.net/showthread.php?tid=8" title="Правила игрового сервера">Правила (x20)</a> - 
-						<a href="http://forum.zealite.net/showthread.php?tid=47" title="Бан лист">Бан лист (x20)</a><br />					
-						<a href="https://dl.dropboxusercontent.com/u/5370806/LIF.MAP/map.html" title="Игровая карта (x20)">Игровая карта (x20)</a><br />
-						<a href="https://dl.dropboxusercontent.com/u/5370806/weather/indexdev.html?day=129" title="Прогноз погоды">Прогноз погоды</a><br />
-						<a href="http://forum.zealite.net/memberlist.php?perpage=20&sort=lastvisit&order=descending" title="Пользователи форума">Пользователи форума</a>
-						<br />					
-						<br />					
-						
-						Игроки:<span data-ng-if="adminHere == 'Y'" style="color: red;"> [!!!ADMIN HERE!!!]</span><br /><br />
-						<div data-ng-repeat="users in model.n track by $index">
-							{{$index+1}}. {{users.n+' '+users.ln}}
-						
-							<span data-ng-repeat="friend in friends"><span data-ng-if="(users.n+' '+users.ln) == friend" style="color: green;"> [друг]</span></span>
-							
-							<span data-ng-repeat="enemy in enemies"><span data-ng-if="(users.n+' '+users.ln) == enemy" style="color: red;"> [враг]</span></span>
-													
-							<span style="float: right;" data-ng-if="mmm[$index]==0">
-								<a href="" data-ng-click="mark(users.n+' '+users.ln, 'friend', $index)" style="color: green; text-decoration: none;" title="это друг">+</a>
-								<a href="" data-ng-click="mark(users.n+' '+users.ln, 'enemy', $index)" style="color: red; text-decoration: none;" title="это враг">-</a>
-							<span>
+					<div class="content">											
+						<div class="content">											
+							<input placeholder="#tag/name" data-ng-model="search_text" />
+							<button data-ng-click="searchFunc()">search</button>
+						</div>						
+						<div class="content">	
+							<a href="http://coub.com">Перейти на coub</a>	
 						</div>
-						
-						<br />
-						
-						<div id="pattern" class="pattern"> 
-							<form action="http://lifeisfeudal-ru.gamepedia.com/index.php" method="GET" class="f" target="_blank"> 
-								<input type="search" name="search" placeholder="Найти что то в вики.." />
-								<input type="submit" name="fulltext" class="btn search-submit" value="Найти" /> 
-							</form>
+						<div class="content">	
+							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
 						</div>
-						
-						<div id="logo">
-							Перейти на форумы Zealite:
-							<a href="http://forum.zealite.net/" title="Перейти на форумы Zealite"><img src="lif_logo.png" alt="Перейти на форумы Zealite" /></a>
-						</div>
-						<br />
-						<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
 					</div>
 				</td>
 			</tr>
-		</table>	
-		<!-- <pre data-ng-bind="friends | json"></pre> -->
+		</table>
+		{{model.config.url}}
+		<div class="content" data-ng-repeat="enemy in model.data.coubs track by $index">
+			<a href="{{enemy.file_versions.mobile.gifv}}">{{enemy.title}} {{$index+1}}</a>
+			<img ng-src="{{enemy.small_picture}}" width="60px" />			
+		</div>
 	</body>
 </html>
