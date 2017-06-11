@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="_options" data-ng-csp>
+    <head>
+        <title>Coub chrome.Ext - Options Page</title>
+        <meta charset="UTF-8" />		
+        <script type="text/javascript" src="/angular.min.js"></script>
+        <script type="text/javascript" src="/options.js"></script>
+    </head>
+    <body bgcolor="{{color?'#'+color:'#FFFFFF'}}" data-ng-controller="OptionsCtrl" ng-cloak>
+		
+		<md-content layout-padding>
+					
+			<button id="save" data-ng-click="saveOptions()">Сохранить / Save</button>
+			
+			<!-- <div id="status"></div>
+			<div data-ng-if="saved"><br />Запомнили</div> -->
+		
+		</md-content>
+	</body>
+</html>

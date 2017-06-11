@@ -1,5 +1,5 @@
 {
-    "name": "Coub player/tools",
+    "name": "Coub player/tools/more",
     "description": "hello_world_education group",   
 	"browser_action": {
 		"default_icon": "icon.png",

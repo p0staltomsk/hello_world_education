@@ -13,7 +13,7 @@ app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
 	
 	$scope.searchFunc = function() {
 	
-		console.log('searchFunc function',$scope.url+$scope.search_text+$scope.url_foot);
+		// console.log('searchFunc function',$scope.url+$scope.search_text+$scope.url_foot);
 		
 		$http({method: $scope.method, url: $scope.url+$scope.search_text+$scope.url_foot}).
 		then(function(response) {		
