@@ -8,6 +8,9 @@ app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
 	$scope.response = null;
 	/* $scope.search_text = ''; */
 	
+	/* // /api/v2/channels/notifications_viewed	
+	// /api/v2/notifications */
+	
 	$scope.url = 'http://coub.com/api/v2/search?q=';
 	$scope.url_foot = '&order_by=newest_popular';
 	
@@ -15,7 +18,11 @@ app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
 	
 		// console.log('searchFunc function',$scope.url+$scope.search_text+$scope.url_foot);
 		
-		$http({method: $scope.method, url: $scope.url+$scope.search_text+$scope.url_foot}).
+		$http({
+			method: $scope.method, 
+			url: $scope.url+$scope.search_text+$scope.url_foot,
+			headers: ''
+		}).
 		then(function(response) {		
 			
 			$scope.model = response;		

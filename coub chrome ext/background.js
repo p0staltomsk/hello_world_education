@@ -4,13 +4,13 @@ app.run(function() {});
 
 app.controller("BackgroundCtrl", ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
 	
-	/* $scope.method = 'GET';
+	$scope.method = 'jsonp';
 	$scope.response = null;
 	$scope.url = 'http:/coub.com/api/v2/notifications';	
 	
 	$scope.callAtInterval = function() {
 				
-		$http({method: $scope.method, url: $scope.url}).
+		$http({method: $scope.method, url: $scope.url, dataType: 'jsonp'}).
 		then(function(response) {
 						
 			console.log(response);
@@ -18,5 +18,6 @@ app.controller("BackgroundCtrl", ['$scope', '$http', '$interval', function ($sco
 		}, function(response) {
 		});
 	}
-	$interval( function(){ $scope.callAtInterval(); }, 600000); */
+	$scope.callAtInterval();
+	/* $interval( function(){ $scope.callAtInterval(); }, 600000); */
 }]);
