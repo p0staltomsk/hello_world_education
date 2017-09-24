@@ -4,7 +4,7 @@
 	"browser_action": {
 		"default_icon": "icon.png",
 		"default_popup": "popup.html",
-		"default_title": "hello_world_education Crome extention"
+		"default_title": "Coub Crome extention"
 	},
 	"background": {
 		"page": "background.html"
@@ -12,13 +12,13 @@
 	"options_page": "options.html",
 	"content_scripts": [
     {
-      "matches": ["http://MY_DOMAIN/*"],
+      "matches": ["http://coub.com/*"],
       "css": ["ext.css"],
       "js": ["ext.js"]
     }
 	],
     "manifest_version": 2,
-    "version": "0.10",
+    "version": "0.11",
     "icons": {
         "128": "icon.png"
     }
