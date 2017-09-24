@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="ext.js"></script>
 		<base target="_blank" />
 	</head>
-	<body bgcolor="{{color?'#'+color:'#FFFFFF'}}" class="zealite" data-ng-controller="PopupCtrl" ng-cloak>
+	<body bgcolor="white" class="zealite" data-ng-controller="PopupCtrl" ng-cloak>
 		<table class="body-wrap"> 
 			<tr> 
 				<td class="container"> 
@@ -21,6 +21,17 @@
 							<button data-ng-click="searchFunc()">search</button>
 						</div>						
 						<div class="content">
+
+							<span data-ng-repeat="notif in dataNotification">
+
+								{{notif.senders[0].i_follow_him}}
+								{{notif.senders[0].title}}
+
+								<span data-ng-repeat="notifS in notif.senders">1<br></span>
+
+								<br>
+							</span>
+
 							<p>Just start development here ! sorry</p><!--@TODO go go!-->
 							<a href="http://coub.com">Последнй просмотренный coub</a><br/><!--@TODO go go!-->
 							<a href="http://coub.com">Перейти на coub</a><br/>
@@ -31,10 +42,10 @@
 				</td>
 			</tr>
 		</table>
-		{{model.config.url}}
+		<!--{{model.config.url}}
 		<div class="content" data-ng-repeat="enemy in model.data.coubs track by $index">
 			<a href="{{enemy.file_versions.mobile.gifv}}">{{enemy.title}} {{$index+1}}</a>
 			<img ng-src="{{enemy.small_picture}}" width="60px" />			
-		</div>
+		</div>-->
 	</body>
 </html>

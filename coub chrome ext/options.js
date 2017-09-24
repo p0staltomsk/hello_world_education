@@ -1,7 +1,9 @@
-var app = angular.module('_options', []); /* 'ngMaterial', 'ngMessages', 'material.svgAssetsCache' */
+var app = angular.module('_options', []);
 
 app.run(function() {});
 
-app.controller("OptionsCtrl", ['$scope', function ($scope) {
-	
+app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
+
+    console.log('OptionsCtrl init');
+
 }]);
