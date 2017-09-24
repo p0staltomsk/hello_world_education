@@ -24,18 +24,16 @@
 
         /* Two way's */
 
-		/*
-		"page": "background.html",
-		*/
+		"page": "background.html"
 
-        "persistent": false,
-        "scripts": ["sample.js"]
+        /*"persistent": false,
+        "scripts": ["sample.js"]*/
 	},
 
     /*  */
-    "permissions" : [
+    /*"permissions" : [
       "declarativeContent"
-    ],
+    ],*/
 
     /*  */
 	"options_page": "options.html",

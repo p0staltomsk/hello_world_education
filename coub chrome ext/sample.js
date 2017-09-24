@@ -2,10 +2,11 @@ chrome.runtime.onInstalled.addListener(function() {
 
     console.log('chrome runtime init');
 
-    chrome.runtime.onMessage.addListener(
+    /*chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {   console.log(request, sender, sendResponse);
-        chrome.browserAction.setIcon({path:"icon_connect.png"});
-    });
+        if(request.newIconPath)
+            chrome.browserAction.setIcon({path:"icon_connect.png"});
+    });*/
 
 /*
 
