@@ -1,25 +1,61 @@
 {
+    /* Name */
     "name": "Coub player/tools/more",
-    "description": "hello_world_education group",   
-	"browser_action": {
+
+    /* Desc */
+    "description": "Coub.com tools Ext. for Google Chrome based browser's",
+
+    /* Actions */
+    "browser_action": {
 		"default_icon": "icon.png",
 		"default_popup": "popup.html",
 		"default_title": "Coub Crome extention"
 	},
+    /*
+     "page_action" :
+     {
+       "default_icon" : "icon_connect.png",
+       "default_title" : "There's a 'coub.com' in this URL!"
+     },
+     */
+
+    /*  */
 	"background": {
-		"page": "background.html"
+
+        /* Two way's */
+
+		/*
+		"page": "background.html",
+		*/
+
+        "persistent": false,
+        "scripts": ["sample.js"]
 	},
+
+    /*  */
+    "permissions" : [
+      "declarativeContent"
+    ],
+
+    /*  */
 	"options_page": "options.html",
-	"content_scripts": [
-    {
-      "matches": ["http://coub.com/*"],
-      "css": ["ext.css"],
-      "js": ["ext.js"]
-    }
+
+    /*  */
+    "content_scripts": [
+      {
+        "matches": ["http://coub.com/*"],
+        "css": ["ext.css"],
+        "js": ["ext.js"]
+      }
 	],
+
+    /*  */
     "manifest_version": 2,
-    "version": "0.11",
+    "version": "0.113",
+
+    /*  */
     "icons": {
-        "128": "icon.png"
+        "128": "icon.png",
+        "777": "icon_connect.png" /* LOL */
     }
 }
