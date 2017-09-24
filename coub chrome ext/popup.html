@@ -24,12 +24,15 @@
 
 							<span data-ng-repeat="notif in dataNotification">
 
-								{{notif.senders[0].i_follow_him}}
-								{{notif.senders[0].title}}
+								<span data-ng-if="notif.i_follow_him != true">{{notif.senders[0].kind}}</span>
 
-								<span data-ng-repeat="notifS in notif.senders">1<br></span>
+								<p><span data-ng-repeat="notifS in notif.senders" data-ng-if="notifS.i_follow_him != true">
+									{{notifS.i_follow_him}}
+									{{notifS.title}}
+									<a href="http://coub.com/{{notifS.permalink}}">..</a>
+									<br>
+								</span></p>
 
-								<br>
 							</span>
 
 							<p>Just start development here ! sorry</p><!--@TODO go go!-->

@@ -39,6 +39,8 @@ app.controller(
 
 	$scope.callAtInterval = function() {
 
+        $scope.important = 0;
+
 		$http({
 			method: $scope.method,
 			url: $scope.url+'?page='+$scope.page+'&per_page='+$scope.per_page,
@@ -62,9 +64,9 @@ app.controller(
 
             if($scope.important > 20)
                 chrome.browserAction.setBadgeBackgroundColor({ color: 'green' });
-            if($scope.important > 40)
+            if($scope.important > 30)
                 chrome.browserAction.setBadgeBackgroundColor({ color: 'pink' });
-            if($scope.important > 80)
+            if($scope.important > 40)
                 chrome.browserAction.setBadgeBackgroundColor({ color: 'red' });
 
             chrome.browserAction.setBadgeText({text: $scope.important.toString()});
@@ -84,7 +86,7 @@ app.controller(
 	}
 
 	$scope.callAtInterval();
-	// $interval( function(){ $scope.callAtInterval(); }, 60000);
+	$interval( function(){ $scope.callAtInterval(); }, 60000);
 }]);
 
 chrome.runtime.onInstalled.addListener(function() {

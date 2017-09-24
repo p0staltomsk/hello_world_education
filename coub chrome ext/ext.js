@@ -1,6 +1,8 @@
 if(window.angular === undefined) {
 
     console.log('Coub Ext.js init 👊');
+    //console.log(this.document.all);
+
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
     /*.viewer.viewer--v2 .viewer__hand*/
@@ -38,7 +40,7 @@ if(window.angular === undefined) {
             angular.forEach(response.data.notifications, function (field, key) {
                 // $scope.arImportant['kind'] = field.kind;
 
-                // if(field.important === true)
+                if(field.important === true)
                     $scope.dataNotification.push(field);
                     // console.log( field.kind, field.liked, field.recoubed, field.senders[0] );
             });
