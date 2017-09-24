@@ -45,10 +45,10 @@
 				</td>
 			</tr>
 		</table>
-		<!--{{model.config.url}}
+		{{model.config.url}}
 		<div class="content" data-ng-repeat="enemy in model.data.coubs track by $index">
-			<a href="{{enemy.file_versions.mobile.gifv}}">{{enemy.title}} {{$index+1}}</a>
-			<img ng-src="{{enemy.small_picture}}" width="60px" />			
-		</div>-->
+			{{enemy.views_count}} <a href="http://coub.com/view/{{enemy.permalink}}">..</a><br>
+
+		</div>
 	</body>
 </html>

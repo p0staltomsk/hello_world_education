@@ -68,8 +68,8 @@ if(window.angular === undefined) {
         /* // /api/v2/channels/notifications_viewed
         // /api/v2/notifications */
 
-        $scope.url = 'http://coub.com/api/v2/search?q=';
-        $scope.url_foot = '&order_by=newest_popular';
+        $scope.urlSearch = 'http://coub.com/api/v2/search?q=';
+        $scope.url_foot = '&order_by=views_count';
 
         $scope.searchFunc = function () {
 
@@ -77,7 +77,7 @@ if(window.angular === undefined) {
 
             $http({
                 method: $scope.method,
-                url: $scope.url + $scope.search_text + $scope.url_foot,
+                url: $scope.urlSearch + $scope.search_text + $scope.url_foot,
                 headers: ''
             }).then(function (response) {
 
