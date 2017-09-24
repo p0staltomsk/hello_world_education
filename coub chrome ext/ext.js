@@ -3,6 +3,8 @@ var app = angular.module('_popup', []);
 app.run(function() {});
 
 app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
+
+	console.log('HELLO HERE');
 		
 	$scope.method = 'GET';
 	$scope.response = null;
