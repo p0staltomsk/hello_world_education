@@ -20,25 +20,32 @@
 							<input placeholder="#tag/name" data-ng-model="search_text" />
 							<button data-ng-click="searchFunc()">search</button>
 						</div>						
-						<div class="content">
+						<div class="content" ng-cloak>
+
+							<p>Current channel:</p>
+
+							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
+
+							{{dataUser.current_channel.title}} {{dataUser.current_channel.followers_count}}
+
+							<p>Activity log:</p>
 
 							<span data-ng-repeat="notif in dataNotification">
-
-								<span data-ng-if="notif.i_follow_him != true">{{notif.recipient.title}}{{notif.senders[0].kind}}</span>
-
-								<p><span data-ng-repeat="notifS in notif.senders" data-ng-if="notifS.i_follow_him != true">
-									{{notifS.i_follow_him}}
-									{{notifS.title}}
-									<a href="http://coub.com/{{notifS.permalink}}">..</a>
-									<br>
-								</span></p>
-
+                                <p>
+									<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{notif.object.views_count}})</span><br>
+                                    <span data-ng-repeat="notifS in notif.senders" data-ng-if="notifS.i_follow_him != true">
+                                        {{notifS.i_follow_him}} {{notifS.title}} <a href="http://coub.com/{{notifS.permalink}}">..</a><br>
+                                    </span>
+                                </p>
 							</span>
 
-							<p>Just start development here ! sorry</p><!--@TODO go go!-->
+							<p>Quick links:</p>
+
 							<a href="http://coub.com">Последнй просмотренный coub</a><br/><!--@TODO go go!-->
 							<a href="http://coub.com">Перейти на coub</a><br/>
 							<a href="http://coub.com/create">Сделать coub</a><br/>
+							<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a><br/>
+
 							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
 						</div>
 					</div>
@@ -48,7 +55,9 @@
 		{{model.config.url}}
 		<div class="content" data-ng-repeat="enemy in model.data.coubs track by $index">
 			{{enemy.views_count}} <a href="http://coub.com/view/{{enemy.permalink}}">..</a><br>
-
 		</div>
+
+		<!--<pre data-ng-bind="dataUser | json"></pre>-->
+
 	</body>
 </html>

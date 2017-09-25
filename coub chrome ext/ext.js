@@ -7,6 +7,10 @@ if(window.angular === undefined) {
 
     /*.viewer.viewer--v2 .viewer__hand*/
 
+    /*chrome.runtime.onInstalled.addListener(function() {
+        console.log('chrome.runtime.onInstalled.addListener ext.js init');
+    });*/
+
 } else {
 
     console.log('Coub Ext.js init 👊');
@@ -20,13 +24,38 @@ if(window.angular === undefined) {
 
         console.log('PopupCtrl init');
 
+        $scope.serverUrl = 'http://coub.com';
+
         $scope.page = 1;
         $scope.per_page = 50;
         $scope.method = 'GET';
         $scope.response = null;
         $scope.urlNotifications = 'http:/coub.com/api/v2/notifications';
+        $scope.urlAbout = 'http:/coub.com/api/v2/users/me';
         $scope.dataType = 'json';
         $scope.dataNotification = [];
+        $scope.dataUser = [];
+
+        /*
+        * Get coub account and channels info
+        * */
+        $http({
+            method: $scope.method,
+            url: $scope.urlAbout,
+            dataType: $scope.dataType
+        }).
+        then(function(response) {
+
+            console.log(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
+            $scope.dataUser = response.data;
+            $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
+            $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
+
+        }, function(response) {
+            /*
+            * Trow here
+            * */
+        });
 
         $http({
             method: $scope.method,
@@ -46,6 +75,9 @@ if(window.angular === undefined) {
             });
 
         }, function(response) {
+            /*
+            * Trow here
+            * */
         });
 
         console.log( $scope.dataNotification );
@@ -89,9 +121,11 @@ if(window.angular === undefined) {
 
             }, function (response) {
 
-                $scope.model = 'no data';
-
+                /*
+                * Trow here
+                * */
                 console.log('no data');
+                $scope.model = 'no data'; // ???
             });
         }
     }]);

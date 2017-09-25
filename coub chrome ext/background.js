@@ -91,7 +91,7 @@ app.controller(
 
 chrome.runtime.onInstalled.addListener(function() {
 
-    console.log('chrome.runtime.onInstalled.addListener init');
+    console.log('chrome.runtime.onInstalled.addListener background.js init');
 
     chrome.runtime.onMessage.addListener(
 
