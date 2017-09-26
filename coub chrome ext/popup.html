@@ -12,31 +12,35 @@
 		<base target="_blank" />
 	</head>
 	<body bgcolor="white" class="zealite" data-ng-controller="PopupCtrl" ng-cloak>
-		<table class="body-wrap"> 
+		<table class="body-wrap" ng-cloak>
 			<tr> 
-				<td class="container"> 
-					<div class="content">											
-						<div class="content">											
-							<input placeholder="#tag/name" data-ng-model="search_text" />
-							<button data-ng-click="searchFunc()">search</button>
-						</div>						
+				<td class="container" ng-cloak>
+					<div class="content" ng-cloak>
+
+						<!--NOTIFICATIONS-->
 						<div class="content" ng-cloak>
 
-							<p>Current channel:</p>
+							<span data-ng-if="dataUserIcon">
+								<p>Current channel:</p>
 
-							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
+								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
-							{{dataUser.current_channel.title}} {{dataUser.current_channel.followers_count}}
+								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a> ({{dataUser.current_channel.followers_count}}) <br> <a href="" data-ng-click="markAllReaded()" title="mark all readed">mark all readed</a>
+							</span>
 
+							<span data-ng-if="dataNotification">
 							<p>Activity log:</p>
 
 							<span data-ng-repeat="notif in dataNotification">
                                 <p>
 									<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{notif.object.views_count}})</span><br>
-                                    <span data-ng-repeat="notifS in notif.senders" data-ng-if="notifS.i_follow_him != true">
-                                        {{notifS.i_follow_him}} {{notifS.title}} <a href="http://coub.com/{{notifS.permalink}}">..</a><br>
+                                    <span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
+										<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a> ({{notifS.followers_count}})
+										<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a>
+										<br>
                                     </span>
                                 </p>
+							</span>
 							</span>
 
 							<p>Quick links:</p>
@@ -48,14 +52,37 @@
 
 							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
 						</div>
+
+						<!--SAERCH-->
+						<div class="content" ng-cloak>
+
+							<span data-ng-if="logData">
+							<p>Search log:</p>
+
+							<div class="content" data-ng-repeat="eachItem in logData track by $index">
+								<a href="http://coub.com/search?q={{eachItem.query}}" target="_blank">{{eachItem.query}}</a>
+								<br>
+							</div>
+							</span>
+
+							<input placeholder="#tag/name" data-ng-model="search_text" />
+							<button data-ng-click="searchFunc()">search</button>
+
+							<span data-ng-if="model.data.coubs">
+								<p>Search result's:</p>
+
+								<div class="content" data-ng-repeat="eachItem in model.data.coubs track by $index">
+									<a href="http://coub.com/view/{{eachItem.permalink}}" target="_blank">{{eachItem.title}}</a>
+									<br>
+								</div>
+							</span>
+
+						</div>
+
 					</div>
 				</td>
 			</tr>
 		</table>
-		{{model.config.url}}
-		<div class="content" data-ng-repeat="enemy in model.data.coubs track by $index">
-			{{enemy.views_count}} <a href="http://coub.com/view/{{enemy.permalink}}">..</a><br>
-		</div>
 
 		<!--<pre data-ng-bind="dataUser | json"></pre>-->
 

@@ -6,10 +6,28 @@
         <script type="text/javascript" src="/angular.min.js"></script>
         <script type="text/javascript" src="/options.js"></script>
     </head>
-    <body bgcolor="{{color?'#'+color:'#FFFFFF'}}" data-ng-controller="OptionsCtrl" ng-cloak>
+    <body bgcolor="white" data-ng-controller="OptionsCtrl" ng-cloak>
 		
 		<md-content layout-padding>
-					
+
+            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" />Делать звук 15% на сайте coub.com</label>
+            <br />
+            <br />
+
+            <label><input type="checkbox" id="hideHand" data-ng-checked="hideHand=='true'" />Убрать "руку" на коубах в режиме "мозайки" сайта coub.com?</label>
+            <br />
+            <br />
+
+            Любимый цвет:
+            <select id="color">
+                <option value="FFFFFF">Белый</option>
+                <option value="005EA7">Голубой</option>
+                <option value="FFDE40">Желтый</option>
+                <option value="EEEEEE">Серый</option>
+            </select>
+            <br />
+            <br />
+
 			<button id="save" data-ng-click="saveOptions()">Сохранить / Save</button>
 
 		</md-content>

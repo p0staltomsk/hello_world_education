@@ -30,6 +30,8 @@
         "scripts": ["sample.js"]*/
 	},
 
+    "permissions": ["contextMenus", "downloads", "downloads.open", "downloads.shelf"],
+
     /*  */
     /*"permissions" : [
       "declarativeContent"
@@ -49,7 +51,7 @@
 
     /*  */
     "manifest_version": 2,
-    "version": "0.115",
+    "version": "0.211",
 
     /*  */
     "icons": {
