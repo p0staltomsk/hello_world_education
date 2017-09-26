@@ -20,7 +20,7 @@ if(window.angular === undefined) {
     var script = {
 
         type: 'text/css', style: document.createElement('style'),
-        content: ".viewer__hand {display:none !important;}",
+        content: ".viewer__hand, #hs-beacon {display:none !important;}",
         append: function() {
 
             this.style.type = this.type;

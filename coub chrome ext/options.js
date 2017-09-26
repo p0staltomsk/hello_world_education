@@ -11,8 +11,9 @@ app.controller("OptionsCtrl", ['$scope', function ($scope) {
      */
     $scope.loadOptions = function() {
         console.log(localStorage);
-        $scope.hideHand = localStorage.hideHand;
-        $scope.soundLow = localStorage.soundLow;
+        $scope.hideHand         = localStorage.hideHand;
+        $scope.hideChatIcon     = localStorage.hideChatIcon;
+        $scope.soundLow         = localStorage.soundLow;
     }
 
     /**
@@ -22,6 +23,9 @@ app.controller("OptionsCtrl", ['$scope', function ($scope) {
 
         var field = document.getElementById("hideHand");
         localStorage.hideHand = field.checked;
+
+        var field = document.getElementById("hideChatIcon");
+        localStorage.hideChatIcon = field.checked;
 
         var field = document.getElementById("soundLow");
         localStorage.soundLow = field.checked;

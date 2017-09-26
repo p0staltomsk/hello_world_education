@@ -17,6 +17,8 @@
 				<td class="container" ng-cloak>
 					<div class="content" ng-cloak>
 
+						<a href="http://coub.com/create">Сделать coub</a><br/>
+
 						<!--NOTIFICATIONS-->
 						<div class="content" ng-cloak>
 
@@ -33,7 +35,7 @@
 
 							<span data-ng-repeat="notif in dataNotification">
                                 <p>
-									<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{notif.object.views_count}})</span><br>
+									<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{(notif.object.views_count) ? notif.object.views_count : 0}})</span><br>
                                     <span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 										<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a> ({{notifS.followers_count}})
 										<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a>
@@ -47,7 +49,7 @@
 
 							<a href="http://coub.com">Последнй просмотренный coub</a><br/><!--@TODO go go!-->
 							<a href="http://coub.com">Перейти на coub</a><br/>
-							<a href="http://coub.com/create">Сделать coub</a><br/>
+
 							<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a><br/>
 
 							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
@@ -59,11 +61,12 @@
 							<span data-ng-if="logData">
 							<p>Search log:</p>
 
-							<div class="content" data-ng-repeat="eachItem in logData track by $index">
+							<div data-ng-repeat="eachItem in logData track by $index">
 								<a href="http://coub.com/search?q={{eachItem.query}}" target="_blank">{{eachItem.query}}</a>
-								<br>
 							</div>
 							</span>
+
+							<br>
 
 							<input placeholder="#tag/name" data-ng-model="search_text" />
 							<button data-ng-click="searchFunc()">search</button>
@@ -71,9 +74,8 @@
 							<span data-ng-if="model.data.coubs">
 								<p>Search result's:</p>
 
-								<div class="content" data-ng-repeat="eachItem in model.data.coubs track by $index">
+								<div data-ng-repeat="eachItem in model.data.coubs track by $index">
 									<a href="http://coub.com/view/{{eachItem.permalink}}" target="_blank">{{eachItem.title}}</a>
-									<br>
 								</div>
 							</span>
 
