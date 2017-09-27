@@ -18,33 +18,36 @@
 					<div class="content" ng-cloak>
 
                         <!--HOT LINKS GOTO or MAKE COUB-->
-						<a href="http://coub.com/create" class="createCoub">Сделать coub</a>
-						<a href="http://coub.com" class="goCoub">Перейти на сайт coub</a>
+						<a href="http://coub.com/create" class="createCoub">Make COUB</a>
+						<a href="http://coub.com/likes" class="goCoub">Likes log 1</a>
+						<a href="http://coub.com/likes" class="goCoub">Likes log 2</a>
 
 						<br clear="all" />
+						coub.com API
 						<br clear="all" />
 
 						<!--NOTIFICATIONS-->
 						<div class="content content_noBottomBorder content_lightgray" ng-cloak>
 
 							<span data-ng-if="dataUserIcon">
-								<p>Current channel:</p>
+								<p>Current you channel:</p>
 
 								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
-								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a> ({{dataUser.current_channel.followers_count}}) <br> <a href="" data-ng-click="markAllReaded()" title="mark all readed">mark all readed</a>
+								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a> ({{dataUser.current_channel.followers_count}}) (<span class="orangered">{{dataUser.current_channel.following_count}}</span>) <br> <a href="" data-ng-click="markAllReaded()" title="mark all readed">mark all readed</a>
 							</span>
 
 							<span data-ng-if="dataNotification">
-								<p>Activity log:</p><!--@TODO hide if no have notifications-->
+								<p>Activity log from all channel's:</p><!--@TODO hide if no have notifications-->
 								<!--<pre data-ng-bind="dataNotification | json"></pre>-->
 
 								<span data-ng-repeat="notif in dataNotification">
 									<!--<pre data-ng-bind="notif.kind | json"></pre>-->
 									<p>
-										<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{(notif.object.views_count) ? notif.object.views_count : 0}})</span><br>
+										event:<span class="orangered">{{notif.kind}}</span>
+										<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{(notif.object.views_count) ? notif.object.views_count : notif.object.followers_count}})</span><br>
 										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
-											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a> ({{notif.kind}}) ({{notifS.followers_count}})
+											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a> ({{notif.kind}}) (<spam class="orangered">{{notifS.followers_count}}</spam>)
 											<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a><!-- @TODO HIDE AFTER CLICK-->
 											<br>
 										</span>
@@ -54,17 +57,18 @@
 
 							<p>Quick links:</p>
 
-							<a href="http://coub.com">Последнй просмотренный coub</a><br/><!--@TODO go go!-->
+							<a href="http://coub.com">Last viewed COUB</a><br/><!--@TODO go go!-->
+							<a href="http://coub.com">Donate this app!</a><br/><!--@TODO go go!-->
 
 							<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a><br/>
-							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
+							<a href="/options.html" target="_blank" title="Settings">Settings</a>
 						</div>
 
 						<!--SAERCH-->
 						<div class="content content_lightgray" ng-cloak>
 
 							<span data-ng-if="logData">
-							<p>Search log:</p>
+							<p>Search log from coub.com:</p>
 
 							<div data-ng-repeat="eachItem in logData track by $index">
 								<a href="http://coub.com/search?q={{eachItem.query}}" target="_blank">{{eachItem.query}}</a>
@@ -74,7 +78,7 @@
 							<br>
 
 							<input placeholder="#tag/name" data-ng-model="search_text" />
-							<button data-ng-click="searchFunc()">search</button>
+							<button data-ng-click="searchFunc()">search by click</button>
 
 							<span data-ng-if="model.data.coubs">
 								<p>Search result's:</p>

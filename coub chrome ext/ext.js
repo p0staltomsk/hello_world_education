@@ -3,7 +3,7 @@ if(window.angular === undefined) {
     /**
      *  If Coub.com tab
      */
-    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
+    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage, CoubPlayer);
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
     if(!localStorage.soundLow) // @TODO not work now
@@ -20,7 +20,12 @@ if(window.angular === undefined) {
     var script = {
 
         type: 'text/css', style: document.createElement('style'),
-        content: ".viewer__hand, #hs-beacon {display:none !important;}",
+        content: "" +
+        ".viewer__hand, #hs-beacon {display:none !important;} " +
+        ".coub__description{background-color:#f8f8f8 !important;} " +
+        ".coub__views-count span{color:orangered !important;}" +
+        ".channel__description {/*background-color:#f8f8f8 !important;*/}" +
+        "",
         append: function() {
 
             this.style.type = this.type;

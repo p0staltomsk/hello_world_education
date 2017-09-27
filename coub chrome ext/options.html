@@ -10,29 +10,31 @@
 		
 		<md-content layout-padding>
 
-            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" />Делать звук 15% на сайте coub.com</label>
+            <!--@TODO NOT WORKING-->
+            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" />Sound low down to 15% on coub.com</label>
             <br />
             <br />
 
-            <label><input type="checkbox" id="hideHand" data-ng-checked="hideHand=='true'" />Убрать "руку" на коубах в режиме "мозайки" сайта coub.com?</label>
+            <label><input type="checkbox" id="hideHand" data-ng-checked="hideHand=='true'" />Hide "hand" in mosaic list style on coub.com</label>
             <br />
             <br />
 
-            <label><input type="checkbox" id="hideChatIcon" data-ng-checked="hideChatIcon=='true'" />Убрать иконку чата с сайта coub.com?</label>
+            <label><input type="checkbox" id="hideChatIcon" data-ng-checked="hideChatIcon=='true'" />Hide chat icon on coub.com</label>
             <br />
             <br />
 
-            Любимый цвет:
+            Best Color you like:
             <select id="color">
-                <option value="FFFFFF">Белый</option>
-                <option value="005EA7">Голубой</option>
-                <option value="FFDE40">Желтый</option>
-                <option value="EEEEEE">Серый</option>
+                <option value="FFFFFF">White</option>
+                <option value="005EA7">Blue</option>
+                <option value="FFDE40">Orange</option>
+                <option value="EEEEEE">Gray</option>
             </select>
             <br />
             <br />
 
-			<button id="save" data-ng-click="saveOptions()">Сохранить / Save</button>
+			<button id="save" data-ng-click="saveOptions()">Options save</button>
+            <!--@TODO NOT WORKING-->
 
 		</md-content>
 	</body>
