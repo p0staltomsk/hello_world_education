@@ -3,7 +3,7 @@ if(window.angular === undefined) {
     /**
      *  If Coub.com tab
      */
-    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage, CoubPlayer);
+    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage); /* @TODO, CoubPlayer DEBUS HERE*/
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
     if(!localStorage.soundLow) // @TODO not work now
