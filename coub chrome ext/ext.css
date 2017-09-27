@@ -32,3 +32,4 @@ ul li{margin-left:5px;list-style-position:inside}
 .clear{display:block;clear:both}
 table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .header.container table td.logo,.column tr td{padding:15px}
+.createCoub{float: right; clear: both;}

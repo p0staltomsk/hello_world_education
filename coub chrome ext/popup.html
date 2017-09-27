@@ -17,7 +17,8 @@
 				<td class="container" ng-cloak>
 					<div class="content" ng-cloak>
 
-						<a href="http://coub.com/create">Сделать coub</a><br/>
+                        <!--MAKE COUB-->
+						<a href="http://coub.com/create" class="createCoub">Сделать coub</a><br/>
 
 						<!--NOTIFICATIONS-->
 						<div class="content" ng-cloak>
@@ -38,7 +39,7 @@
 									<span><b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b> ({{(notif.object.views_count) ? notif.object.views_count : 0}})</span><br>
                                     <span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 										<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a> ({{notifS.followers_count}})
-										<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a>
+										<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a><!-- @TODO HIDE AFTER CLICK-->
 										<br>
                                     </span>
                                 </p>
@@ -49,9 +50,7 @@
 
 							<a href="http://coub.com">Последнй просмотренный coub</a><br/><!--@TODO go go!-->
 							<a href="http://coub.com">Перейти на coub</a><br/>
-
 							<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a><br/>
-
 							<a href="/options.html" target="_blank" title="Открыть настройки">Открыть настройки</a>
 						</div>
 
