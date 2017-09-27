@@ -24,6 +24,7 @@ if(window.angular === undefined) {
         ".viewer__hand, #hs-beacon {display:none !important;} " +
         ".coub__description{background-color:#f8f8f8 !important;} " +
         ".coub__views-count span{color:orangered !important;}" +
+        ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
         ".channel__description {/*background-color:#f8f8f8 !important;*/}" +
         "",
         append: function() {
@@ -260,4 +261,6 @@ if(window.angular === undefined) {
             });
         }
     }]);
+
+    chrome.browserAction.setIcon({path:"icon.png"});
 }

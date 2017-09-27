@@ -37,3 +37,9 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .goCoub{float: right; margin-right: 10px;}
 .createCoub{float: right;}
 .orangered{color: orangered;}
+
+/**/
+.like {width: 5px; height: 10px;}
+.recoub {width: 10px; height: 10px;}
+.follow {width: 10px; height: 10px;}
+.other {width: 16px; height: 16px;}
