@@ -25,11 +25,14 @@ p.lead{font-size:17px}
 p.last{margin-bottom:0}
 ul li{margin-left:5px;list-style-position:inside}
 .container{display:block!important;max-width:100%!important;clear:both!important;margin:0 auto!important}
-.content{max-width:100%;display:block;margin:0 auto;padding:10px}
+.content{max-width:100%;display:block;margin:0 auto;padding:10px;padding-top: 0px;border:1px solid #2BA6CB;}
+.content_noBottomBorder{border-bottom:0px;}
+.content_lightgray{background: #f8f8f8;}
 .column{width:300px;float:left}
 .column-wrap{max-width:600px!important;margin:0 auto;padding:0!important}
 .social .column{width:280px;min-width:279px;float:left}
 .clear{display:block;clear:both}
 table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .header.container table td.logo,.column tr td{padding:15px}
-.createCoub{float: right; clear: both;}
+.goCoub{float: right; margin-right: 10px;}
+.createCoub{float: right;}
