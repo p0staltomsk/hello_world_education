@@ -30,7 +30,7 @@
         "scripts": ["sample.js"]*/
 	},
 
-    "permissions": ["contextMenus", "downloads", "downloads.open", "downloads.shelf"],
+    "permissions": ["tabs", "contextMenus", "downloads", "downloads.open", "downloads.shelf"],
 
     /*  */
     /*"permissions" : [

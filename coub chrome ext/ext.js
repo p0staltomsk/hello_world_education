@@ -69,6 +69,20 @@ if(window.angular === undefined) {
 
         console.log('PopupCtrl init');
 
+        getCurrentTab().then(function(tab){});
+
+        function getCurrentTab(){
+            return new Promise(function(resolve, reject){
+                chrome.tabs.query({
+                    active: true,               // Select active tabs
+                    lastFocusedWindow: true     // In the current window
+                }, function(tabs) {
+                    resolve(tabs[0]);
+                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
+                });
+            });
+        }
+
         $scope.serverUrl = 'http://coub.com';
 
         $scope.page             = 1;
@@ -236,6 +250,18 @@ if(window.angular === undefined) {
                 * Trow here
                 * */
             });
+        }
+
+        /**
+         *  follow to user
+         */
+        $scope.tryMakeCoub = function ($serverCTU) {
+
+            /*<!-- @TODO editor_create_pasteALinkScreen_fromClipboard -->
+            <!-- http://coub.com/create input-field -rn https://www.youtube.com/watch?v=e1PFFPjzIgc -->*/
+
+            console.log($serverCTU);
+            location.href='http://coub.com';
         }
 
         /**
