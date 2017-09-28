@@ -25,7 +25,6 @@ if(window.angular === undefined) {
         ".coub__description{background-color:#f8f8f8 !important;} " +
         ".coub__views-count span{color:orangered !important;}" +
         ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
-        ".channel__description {/*background-color:#f8f8f8 !important;*/}" +
         "",
         append: function() {
 
@@ -61,6 +60,10 @@ if(window.angular === undefined) {
     var app = angular.module('_popup', []);
 
     app.run(function () {});
+
+    app.controller("headPopupCtrl", ['$scope', function ($scope) {
+        console.log("headPopupCtrl init");
+    }]);
 
     app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
 
@@ -142,10 +145,12 @@ if(window.angular === undefined) {
          */
         $http({
             method: $scope.method,
-            url: $scope.urlNotifications+'?page='+$scope.page+'&per_page='+$scope.per_page,
+            url: $scope.urlNotifications + '?page='+$scope.page + '&per_page=' + $scope.per_page, // http://coub.com/dev/docs/Coub+API/Notifications
             dataType: $scope.dataType
         }).
         then(function(response) {
+
+            /*console.log(response.data.notifications);*/
 
             $scope.dataNotification = [];
 

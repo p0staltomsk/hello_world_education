@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="_popup" data-ng-csp>
-	<head>
+	<head data-ng-controller="headPopupCtrl">
 		<title>Coub Chrome.Ext - Popup</title>
 		<meta charset="UTF-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="ext.js"></script>
 		<base target="_blank" />
 	</head>
-	<body bgcolor="white" class="zealite" data-ng-controller="PopupCtrl" ng-cloak>
+	<body bgcolor="white" class="coubExt" data-ng-controller="PopupCtrl" ng-cloak>
 		<table class="body-wrap" ng-cloak>
 			<tr> 
 				<td class="container" ng-cloak>
@@ -23,7 +23,7 @@
 						<a href="http://coub.com/likes" class="goCoub">Likes log 2</a>
 
 						<br clear="all" />
-						coub.com API
+						coub.com API based
 						<br clear="all" />
 
 						<!--NOTIFICATIONS-->
@@ -49,14 +49,16 @@
 										<!--KIND-->
 										event:<span class="orangered">{{notif.kind}}</span>
 
-										<!--ICON-->
-										<span data-ng-if="notif.system_notification == rtue"><img class="like" src="icon_connect.png" />!! </span>
-										<span data-ng-if="notif.kind == 'like'"><img class="like" src="icon_connect.png" /> </span>
-										<span data-ng-if="notif.kind == 'recoub'"><img class="recoub" src="icon_connect.png" /> </span>
-										<span data-ng-if="notif.kind == 'follow'"><img class="follow" src="icon.png" /> </span>
-										<span data-ng-if="notif.kind != 'like' && notif.recoub != 'recoub' && notif.recoub != 'follow'">
-											<img class="other" src="icon.png" />
-										</span>
+										<!--ICONS-->
+										<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!! </span>
+
+										<span data-ng-if="notif.kind == 'like'"><img class="likeExt" src="icon_connect.png" /> </span>
+
+										<span data-ng-if="notif.kind == 'recoub'"><img class="recoubExt" src="icon_connect.png" /> </span>
+
+										<span data-ng-if="notif.kind == 'follow'"><img class="followExt" src="icon.png" /> </span>
+
+										<span data-ng-if="notif.kind == 'new_category'"><img class="otherExt" src="icon.png" /></span>
 
 										<!--Object-->
 										<span>
