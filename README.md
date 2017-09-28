@@ -23,4 +23,11 @@ Amazing function's:
 <li>5. <s><i>Safety js browser mining BTC.</i></s> Joke!</li>
 </ul>
 
+<pre>Donate this app pls!!! 
+Bitcoin (BTC) 1LZBGorYitWzZHVwUMLQEn3k9wvWTGnB45 
+DopeCoin (DOPE) DBCPN7gEuAcetW6XquXUitJt9LFxPVsckY 
+Ethereum (ETH) 0xe2bd097096a8f3b91b0700e636a5e89e7fad1ac4
+PutinCoin (PUT) PBN5KmJT4S5WuQ7NvWwo8teTiBQoivZryB
+</pre>
+
 Good luck! ;D
