@@ -99,6 +99,7 @@ if(window.angular === undefined) {
         $scope.dataUser         = (localStorage.dataUser)       ? JSON.parse(localStorage.dataUser)     : [];
         $scope.dataUserIcon     = (localStorage.dataUserIcon)   ? JSON.parse(localStorage.dataUserIcon) : '';
         $scope.logData          = (localStorage.logData)        ? JSON.parse(localStorage.logData)      : '';
+        $scope.dataChannelBachground = (localStorage.dataChannelBachground) ? localStorage.dataChannelBachground : '';
 
         /**
          * Load from storage
@@ -115,11 +116,24 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
-                /*console.log(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));*/
+                /**
+                 * 	Only current channet background need
+                 */
+                angular.forEach(response.data.channels, function (field, key) {
+
+                    if(field.id === response.data.current_channel.id) {
+                        $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                        localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                        /*console.log($scope.dataChannelBachground);*/
+                        /*console.log(field.background_coub);
+                        console.log(field.background_coub.audio_file_url);*/
+                    }
+                });
 
                 /**
                  *  save user pic and cache
                  */
+
                 localStorage.dataUser = JSON.stringify(response.data);
                 $scope.dataUser = response.data;
                 localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));

@@ -19,8 +19,8 @@
 
                         <!--HOT LINKS GOTO or MAKE COUB-->
 						<a href="http://coub.com/create" class="createCoub">Make COUB</a>
-						<a href="http://coub.com/likes" class="goCoub">Likes log 1</a>
-						<a href="http://coub.com/likes" class="goCoub">Likes log 2</a>
+						<a href="http://coub.com/likes" class="goCoub">Likes log</a>
+						<a href="http://coub.com/explore/hot" class="goCoub">Hot log</a>
 
 						<br clear="all" />
 						<br>
@@ -35,6 +35,10 @@
 
 							<span data-ng-if="dataUserIcon">
 								<p>Current channel info:</p>
+
+								<img data-ng-src="{{dataChannelBachground}}" class="createCoub" />
+
+								<!--<pre data-ng-bind="dataUser.channels | json"></pre>-->
 
 								<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
@@ -71,12 +75,18 @@
 											<!--<pre data-ng-bind="notif | json"></pre>-->
 										</span>
 										<br>
-										<!--User actions-->
+										<!--User's i not follow him actions-->
 										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
 											({{notif.kind}}) (<span class="orangered">{{notifS.followers_count}}</span>)
 											<a href="" data-ng-click="follow(dataUser.current_channel.id, notifS.id)" title="follow him">+</a>
 											<!-- @TODO HIDE AFTER CLICK-->
+											<br>
+										</span>
+										<!--User's i follow him actions-->
+										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
+											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
+											({{notif.kind}}) <span class="orangered">❤</span>
 											<br>
 										</span>
 									</p>
