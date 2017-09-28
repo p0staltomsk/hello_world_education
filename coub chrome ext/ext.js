@@ -261,7 +261,7 @@ if(window.angular === undefined) {
             <!-- http://coub.com/create input-field -rn https://www.youtube.com/watch?v=e1PFFPjzIgc -->*/
 
             console.log($serverCTU);
-            location.href='http://coub.com';
+            /*location.href='http://coub.com';*/
         }
 
         /**
