@@ -41,9 +41,9 @@ ul li{margin-left:5px;list-style-position:inside}
 .clear{display:block;clear:both}
 table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .header.container table td.logo,.column tr td{padding:15px}
-.goCoub{float: right; margin-right: 10px;}
-.createCoub{float: right;}
+.goCoub, .createCoub{float: right; margin-right: 10px;}
 .orangered{color: orangered;}
+.backgroundPic{color: orangered; float: right; clear: both;}
 
 /*  */
 .likeExt {width: 5px; height: 10px;}
