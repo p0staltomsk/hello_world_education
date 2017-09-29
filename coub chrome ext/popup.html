@@ -7,15 +7,23 @@
 		<meta name="viewport" content="width=device-width" />
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" /> 
 		<link href="/ext.css" rel="stylesheet" type="text/css" />
+
 		<script type="text/javascript" src="angular.min.js"></script>
-		<script type="text/javascript" src="ext.js"></script>
+
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="flowtype.js"></script>
+
+        <script type="text/javascript" src="ext.js"></script>
+
 		<base target="_blank" />
 	</head>
 	<body bgcolor="white" class="coubExt" data-ng-controller="PopupCtrl" ng-cloak>
 		<table class="body-wrap" ng-cloak>
 			<tr> 
 				<td class="container" ng-cloak>
+<!--
 					<div class="content" ng-cloak>
+-->
 
                         <!--HOT LINKS GOTO or MAKE COUB-->
 						<a href="http://coub.com/create" class="createCoub">Make COUB</a>
@@ -31,7 +39,7 @@
 						<br clear="all" />
 
 						<!--NOTIFICATIONS-->
-						<small class="content content_noBottomBorder content_lightgray" ng-cloak>
+						<small class="content content_lightgray" ng-cloak>
 
 							<span data-ng-if="dataUserIcon">
 								<p>Current channel info:</p>
@@ -104,7 +112,7 @@
 
 							Bitcoin (BTC) 🌏 1LZBGorYitWzZHVwUMLQEn3k9wvWTGnB45
 							<br>
-							DopeCoin (DOPE)💰 DBCPN7gEuAcetW6XquXUitJt9LFxPVsckY
+							DopeCoin (DOPE) 💰 DBCPN7gEuAcetW6XquXUitJt9LFxPVsckY
 							<br>
 							Ethereum (ETH) 💎 0xe2bd097096a8f3b91b0700e636a5e89e7fad1ac4
 							<br>
@@ -119,7 +127,7 @@
 						</div>
 
 						<!--SAERCH-->
-						<div class="content content_lightgray" ng-cloak>
+						<div ng-cloak>
 
 							<span data-ng-if="logData">
 							<p>Search log from coub.com:</p>
@@ -144,7 +152,9 @@
 
 						</div>
 
+<!--
 					</div>
+-->
 				</td>
 			</tr>
 		</table>

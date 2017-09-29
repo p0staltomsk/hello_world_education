@@ -45,6 +45,15 @@ if(window.angular === undefined) {
     console.log('Coub Ext.js init inside ext! 👊 ext.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 0 });
 
+    $(document).ready(function(){
+
+        $('body').flowtype({
+            minimum : 450,
+            maximum : 900
+        });
+
+    });
+
     /*function getword(info,tab) {
         console.log("Word " + info.selectionText + " was clicked.");
         chrome.tabs.create({
@@ -245,7 +254,9 @@ if(window.angular === undefined) {
          */
         $scope.follow = function ($channelId, $userId) {
 
+/*
             console.log($channelId, $userId);
+*/
 
             /**
              *  DO FOLLOW

@@ -1,5 +1,3 @@
-/*#logo{width:200px;margin: 0 auto 0}*/
-
 /*  */
 input{display:block;border:1px solid #000}
 input[type=search]{width:100%;position:relative;top:0;padding:.7em 4em .7em .7em}
@@ -30,10 +28,13 @@ ul li{margin-left:5px;list-style-position:inside}
 .callout a{color:#FFF;text-decoration:none;font-size:80%}
 .header.container table td.label{padding:15px 15px 15px 0}
 .footer-wrap .container td.content p{border-top:1px solid #d7d7d7;padding-top:15px;font-size:10px;font-weight:700}
-.container{display:block!important;max-width:100%!important;clear:both!important;margin:0 auto!important}
+.container{display:block!important;max-width:100%!important;clear:both!important;margin:0 auto!important;}
 .content{max-width:100%;display:block;margin:0 auto;padding:10px;padding-top: 0px;border:1px solid #2BA6CB;}
-.content_noBottomBorder{border-bottom:0px;}
-.content_lightgray{background: #f8f8f8;}
+.content_lightgray{background: #f8f8f8;
+    width: 90%;
+    margin-left: 0;
+    padding-left: 10px;
+}
 .column{width:300px;float:left}
 .column-wrap{max-width:600px!important;margin:0 auto;padding:0!important}
 .social .column{width:280px;min-width:279px;float:left}
