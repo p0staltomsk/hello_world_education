@@ -80,9 +80,9 @@
 										<span>
 											<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
 											({{(notif.object.views_count) ? notif.object.views_count : notif.object.followers_count}})
-											<!--<pre data-ng-bind="notif | json"></pre>-->
 										</span>
 										<br>
+
 										<!--User's i not follow him actions-->
 										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
@@ -91,12 +91,14 @@
 											<!-- @TODO HIDE AFTER CLICK-->
 											<br>
 										</span>
+
 										<!--User's i follow him actions-->
 										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
 											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
 											({{notif.kind}}) <span class="orangered">❤</span>
 											<br>
 										</span>
+                                        
 									</p>
 								</span>
 							</span>

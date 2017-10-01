@@ -125,14 +125,23 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
+                console.log(response.data.channels, response.data.current_channel.id);
+
                 /**
                  * 	Only current channet background need
                  */
                 angular.forEach(response.data.channels, function (field, key) {
 
                     if(field.id === response.data.current_channel.id) {
-                        $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
-                        localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+
+                        if(field.background_coub != null) {
+
+                            $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                            localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                        } else {
+                            $scope.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                            localStorage.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                        }
                         /*console.log($scope.dataChannelBachground);*/
                         /*console.log(field.background_coub);
                         console.log(field.background_coub.audio_file_url);*/
