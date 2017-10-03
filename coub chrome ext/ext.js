@@ -110,6 +110,7 @@ if(window.angular === undefined) {
         $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
         $scope.logData                  = (localStorage.logData)                ? JSON.parse(localStorage.logData)          : '';
         $scope.dataChannelBachground    = (localStorage.dataChannelBachground)  ? localStorage.dataChannelBachground        : '';
+        $scope.dataChannelViewsCount    = (localStorage.dataChannelViewsCount)  ? localStorage.dataChannelViewsCount        : '';
 
         /**
          * Load from storage
@@ -135,6 +136,9 @@ if(window.angular === undefined) {
 
                     if(field.id === response.data.current_channel.id) {
 
+                        $scope.dataChannelViewsCount = field.views_count;
+                        localStorage.dataChannelViewsCount = $scope.dataChannelViewsCount;
+
                         if(field.background_coub != null) {
 
                             $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
@@ -155,6 +159,7 @@ if(window.angular === undefined) {
 
                 localStorage.dataUser = JSON.stringify(response.data);
                 $scope.dataUser = response.data;
+
                 localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
                 $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
 

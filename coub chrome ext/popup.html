@@ -49,11 +49,15 @@
 
 							<img data-ng-src="{{dataChannelBachground}}" class="backgroundPic" />
 
-							<!--<pre data-ng-bind="dataUser.channels | json"></pre>-->
+							<!--<pre data-ng-bind="dataUser.views_count | json"></pre>-->
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a> ({{dataUser.current_channel.followers_count}}) (<span class="orangered">{{dataUser.current_channel.following_count}}</span>)
+
+							<br>
+
+							{{dataChannelViewsCount}} views
 
 							<br>
 
@@ -157,8 +161,6 @@
 						Donate this app pls!!!
 
 						<br>
-
-						<small>
 						Bitcoin (BTC) 🌏 1LZBGorYitWzZHVwUMLQEn3k9wvWTGnB45
 						<br>
 						DopeCoin (DOPE) 💰 DBCPN7gEuAcetW6XquXUitJt9LFxPVsckY
@@ -171,7 +173,6 @@
 						<br>
 						Litecoin (LTC) ⭐ LNy2KM7Ui8NNcqp5HeWCygTBq6D4C1a5Pk
 						<br/>
-						</small>
 
 						<a href="https://www.cryptopia.co.nz/Register?referrer=p0staltomsk" target="_blank">https://www.cryptopia.co.nz 💲</a>
 
