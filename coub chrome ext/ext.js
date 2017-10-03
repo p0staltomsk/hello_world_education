@@ -48,8 +48,8 @@ if(window.angular === undefined) {
     $(document).ready(function(){
 
         $('body').flowtype({
-            minimum : 450,
-            maximum : 900
+            minimum : 360,
+            maximum : 480
         });
 
     });
@@ -92,23 +92,24 @@ if(window.angular === undefined) {
             });
         }
 
-        $scope.serverUrl = 'http://coub.com';
-
-        $scope.page             = 1;
-        $scope.per_page         = 50;
-        $scope.method           = 'GET';
-        $scope.methodPost       = 'POST';
-        $scope.response         = null;
-        $scope.urlNotifications = 'http:/coub.com/api/v2/notifications';
-        $scope.urlAbout         = 'http:/coub.com/api/v2/users/me';
-        $scope.urlSearch        = 'http://coub.com/api/v2/search?q=';
-        $scope.url_foot         = '&order_by=views_count';
-        $scope.dataType         = 'json';
-        $scope.dataNotification = [];
-        $scope.dataUser         = (localStorage.dataUser)       ? JSON.parse(localStorage.dataUser)     : [];
-        $scope.dataUserIcon     = (localStorage.dataUserIcon)   ? JSON.parse(localStorage.dataUserIcon) : '';
-        $scope.logData          = (localStorage.logData)        ? JSON.parse(localStorage.logData)      : '';
-        $scope.dataChannelBachground = (localStorage.dataChannelBachground) ? localStorage.dataChannelBachground : '';
+        $scope.page                     = 1;
+        $scope.per_page                 = 50;
+        $scope.method                   = 'GET';
+        $scope.methodPost               = 'POST';
+        $scope.response                 = null;
+        $scope.serverUrl                = 'http://coub.com';
+        /*$scope.missingAvatarUrl         = 'images/avatar-svg.png';*/
+        $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
+        $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
+        $scope.urlSearch                = 'http://coub.com/api/v2/search?q=';
+        $scope.url_foot                 = '&order_by=views_count';
+        $scope.dataType                 = 'json';
+        $scope.dataNotification         = [];
+        $scope.followStatus             = [];
+        $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
+        $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
+        $scope.logData                  = (localStorage.logData)                ? JSON.parse(localStorage.logData)          : '';
+        $scope.dataChannelBachground    = (localStorage.dataChannelBachground)  ? localStorage.dataChannelBachground        : '';
 
         /**
          * Load from storage
@@ -235,12 +236,12 @@ if(window.angular === undefined) {
         }
 
         /**
-         *  follow to user
+         *  markAllReaded
          */
         $scope.markAllReaded = function () {
 
             /**
-             *  DO FOLLOW
+             *  markAllReaded
              */
             $http({
                 method: $scope.methodPost,
@@ -263,10 +264,6 @@ if(window.angular === undefined) {
          */
         $scope.follow = function ($channelId, $userId) {
 
-/*
-            console.log($channelId, $userId);
-*/
-
             /**
              *  DO FOLLOW
              */
@@ -276,14 +273,42 @@ if(window.angular === undefined) {
                 headers: ''
             }).then(function (response) {
 
-                console.log(response.data);
+                if(response.data.status)
+                    $scope.followStatus = [$userId,"ok"];
 
             }, function (response) {
 
+                $scope.followStatus = [$userId,"false"]
                 /*
                 * Trow here
                 * */
             });
+        }
+
+        /**
+         *  unfollow to user
+         */
+        $scope.unfollow = function ($channelId, $userId) {
+
+            console.log('UNFOLLOW DEBUG',$channelId, $userId);
+
+            /**
+             *  DO UNFOLLOW
+             */
+            /*$http({
+                method: $scope.methodPost,
+                url: $scope.serverUrl + '/api/v2/follows?id=' + $userId + '&channel_id=' + $channelId,
+                headers: ''
+            }).then(function (response) {
+
+                console.log(response.data);
+
+            }, function (response) {
+
+                /!*
+                * Trow here
+                * *!/
+            });*/
         }
 
         /**

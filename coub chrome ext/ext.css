@@ -43,6 +43,7 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .header.container table td.logo,.column tr td{padding:15px}
 .goCoub, .createCoub{float: right; margin-right: 10px;}
 .orangered{color: orangered;}
+.gray{background: #ececec; padding-top: 10px;}
 .backgroundPic{color: orangered; float: right; clear: both;}
 
 /*  */
