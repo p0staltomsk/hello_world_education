@@ -25,6 +25,7 @@ if(window.angular === undefined) {
         ".coub__description{background-color:#f8f8f8 !important;} " +
         ".coub__views-count span{color:orangered !important;}" +
         ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
+        ".-color--emperor {color:orangered !important;}" +
         "",
         append: function() {
 
@@ -48,8 +49,8 @@ if(window.angular === undefined) {
     $(document).ready(function(){
 
         $('body').flowtype({
-            minimum : 450,
-            maximum : 900
+            minimum : 360,
+            maximum : 480
         });
 
     });
@@ -92,23 +93,25 @@ if(window.angular === undefined) {
             });
         }
 
-        $scope.serverUrl = 'http://coub.com';
-
-        $scope.page             = 1;
-        $scope.per_page         = 50;
-        $scope.method           = 'GET';
-        $scope.methodPost       = 'POST';
-        $scope.response         = null;
-        $scope.urlNotifications = 'http:/coub.com/api/v2/notifications';
-        $scope.urlAbout         = 'http:/coub.com/api/v2/users/me';
-        $scope.urlSearch        = 'http://coub.com/api/v2/search?q=';
-        $scope.url_foot         = '&order_by=views_count';
-        $scope.dataType         = 'json';
-        $scope.dataNotification = [];
-        $scope.dataUser         = (localStorage.dataUser)       ? JSON.parse(localStorage.dataUser)     : [];
-        $scope.dataUserIcon     = (localStorage.dataUserIcon)   ? JSON.parse(localStorage.dataUserIcon) : '';
-        $scope.logData          = (localStorage.logData)        ? JSON.parse(localStorage.logData)      : '';
-        $scope.dataChannelBachground = (localStorage.dataChannelBachground) ? localStorage.dataChannelBachground : '';
+        $scope.page                     = 1;
+        $scope.per_page                 = 50;
+        $scope.method                   = 'GET';
+        $scope.methodPost               = 'POST';
+        $scope.response                 = null;
+        $scope.serverUrl                = 'http://coub.com';
+        /*$scope.missingAvatarUrl         = 'images/avatar-svg.png';*/
+        $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
+        $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
+        $scope.urlSearch                = 'http://coub.com/api/v2/search?q=';
+        $scope.url_foot                 = '&order_by=views_count';
+        $scope.dataType                 = 'json';
+        $scope.dataNotification         = [];
+        $scope.followStatus             = [];
+        $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
+        $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
+        $scope.logData                  = (localStorage.logData)                ? JSON.parse(localStorage.logData)          : '';
+        $scope.dataChannelBachground    = (localStorage.dataChannelBachground)  ? localStorage.dataChannelBachground        : '';
+        $scope.dataChannelViewsCount    = (localStorage.dataChannelViewsCount)  ? localStorage.dataChannelViewsCount        : '';
 
         /**
          * Load from storage
@@ -125,14 +128,26 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
+                console.log(response.data.channels, response.data.current_channel.id);
+
                 /**
                  * 	Only current channet background need
                  */
                 angular.forEach(response.data.channels, function (field, key) {
 
                     if(field.id === response.data.current_channel.id) {
-                        $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
-                        localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+
+                        $scope.dataChannelViewsCount = field.views_count;
+                        localStorage.dataChannelViewsCount = $scope.dataChannelViewsCount;
+
+                        if(field.background_coub != null) {
+
+                            $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                            localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                        } else {
+                            $scope.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                            localStorage.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                        }
                         /*console.log($scope.dataChannelBachground);*/
                         /*console.log(field.background_coub);
                         console.log(field.background_coub.audio_file_url);*/
@@ -145,6 +160,7 @@ if(window.angular === undefined) {
 
                 localStorage.dataUser = JSON.stringify(response.data);
                 $scope.dataUser = response.data;
+
                 localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
                 $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
 
@@ -226,12 +242,12 @@ if(window.angular === undefined) {
         }
 
         /**
-         *  follow to user
+         *  markAllReaded
          */
         $scope.markAllReaded = function () {
 
             /**
-             *  DO FOLLOW
+             *  markAllReaded
              */
             $http({
                 method: $scope.methodPost,
@@ -254,10 +270,6 @@ if(window.angular === undefined) {
          */
         $scope.follow = function ($channelId, $userId) {
 
-/*
-            console.log($channelId, $userId);
-*/
-
             /**
              *  DO FOLLOW
              */
@@ -267,14 +279,42 @@ if(window.angular === undefined) {
                 headers: ''
             }).then(function (response) {
 
-                console.log(response.data);
+                if(response.data.status)
+                    $scope.followStatus = [$userId,"ok"];
 
             }, function (response) {
 
+                $scope.followStatus = [$userId,"false"]
                 /*
                 * Trow here
                 * */
             });
+        }
+
+        /**
+         *  unfollow to user
+         */
+        $scope.unfollow = function ($channelId, $userId) {
+
+            console.log('UNFOLLOW DEBUG',$channelId, $userId);
+
+            /**
+             *  DO UNFOLLOW
+             */
+            /*$http({
+                method: $scope.methodPost,
+                url: $scope.serverUrl + '/api/v2/follows?id=' + $userId + '&channel_id=' + $channelId,
+                headers: ''
+            }).then(function (response) {
+
+                console.log(response.data);
+
+            }, function (response) {
+
+                /!*
+                * Trow here
+                * *!/
+            });*/
         }
 
         /**

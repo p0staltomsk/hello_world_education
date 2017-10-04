@@ -15,7 +15,7 @@ h4{font-weight:500;font-size:23px}
 h5{font-weight:400;line-height:16px;font-size:12px}
 h5 a{text-decoration:none}
 form{margin:0 0 1em}
-p,ul{margin-bottom:10px;font-weight:400;font-size:12px;line-height:1.4;color:#777}
+p,ul{margin-bottom: 10px; font-weight: 400; font-size: 14px; line-height: 1.4; color: #777;}
 p.lead{font-size:17px}
 p.last{margin-bottom:0}
 ul li{margin-left:5px;list-style-position:inside}
@@ -27,7 +27,7 @@ ul li{margin-left:5px;list-style-position:inside}
 .btn{text-decoration:none;color:#FFF;background-color:#666;text-align:center;cursor:pointer;display:inline-block;padding:5px}
 .callout a{color:#FFF;text-decoration:none;font-size:80%}
 .header.container table td.label{padding:15px 15px 15px 0}
-.footer-wrap .container td.content p{border-top:1px solid #d7d7d7;padding-top:15px;font-size:10px;font-weight:700}
+.footer-wrap .container td.content p{border-top:1px solid #d7d7d7;padding-top:15px;font-size:12px;font-weight:700}
 .container{display:block!important;max-width:100%!important;clear:both!important;margin:0 auto!important;}
 .content{max-width:100%;display:block;margin:0 auto;padding:10px;padding-top: 0px;border:1px solid #2BA6CB;}
 .content_lightgray{background: #f8f8f8;
@@ -40,13 +40,22 @@ ul li{margin-left:5px;list-style-position:inside}
 .social .column{width:280px;min-width:279px;float:left}
 .clear{display:block;clear:both}
 table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
+
 .header.container table td.logo,.column tr td{padding:15px}
 .goCoub, .createCoub{float: right; margin-right: 10px;}
 .orangered{color: orangered;}
-.backgroundPic{color: orangered; float: right; clear: both;}
+.gray{background: #ececec; padding-top: 10px;}
+.backgroundPicExt{color: orangered; float: right; margin-top: 20px; clear: both;}
+.avatar-svg, .avatarExt {max-width: 38px;max-height: 38px;}
+.hideExt {display: none;}
+.youNotFollow {
+    font-size: 16px;
+}
+/*.title {position: relative;top: -15px;}
+.userPosition {position: relative;top: -15px;}*/
 
 /*  */
 .likeExt {width: 5px; height: 10px;}
 .recoubExt {width: 10px; height: 10px;}
-.followExt {width: 10px; height: 10px;}
+.followExt {width: 16px; height: 16px;}
 .otherExt {width: 16px; height: 16px;}
