@@ -198,7 +198,11 @@ if(window.angular === undefined) {
                         }).
                         then(function(response) {
 
-                            $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url]);
+/*
+                            console.log(response.data);
+*/
+
+                            $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url, response.data.file_versions.mobile.audio[1]]);
 
                         }, function(response) {
                             /*
@@ -208,6 +212,8 @@ if(window.angular === undefined) {
                         //
                     }
                 });
+
+                chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
 
                 console.log($scope.audioByCode);
             }
