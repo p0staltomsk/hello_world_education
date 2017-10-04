@@ -25,6 +25,7 @@ if(window.angular === undefined) {
         ".coub__description{background-color:#f8f8f8 !important;} " +
         ".coub__views-count span{color:orangered !important;}" +
         ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
+        ".-color--emperor {color:orangered !important;}" +
         "",
         append: function() {
 

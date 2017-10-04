@@ -22,8 +22,8 @@
 			<tr> 
 				<td class="container" ng-cloak>
 
-					<!--HOT LINKS GOTO or MAKE COUB-->
-					<a href="http://coub.com/create" class="createCoub">Make blank COUB</a>
+					<!--HOT LINKS & MAKE COUB-->
+					<a href="http://coub.com/create" class="createCoub">Make COUB</a>
 					<a href="http://coub.com/likes" class="goCoub">Likes log</a>
 					<a href="http://coub.com/explore/hot" class="goCoub">Hot log</a>
 
@@ -35,8 +35,8 @@
 
 					<br>
 
-					Current tab url: <!--ITS FUCKING WORK!-->
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)">THIS TAB COUB 🤘🏻</a>
+					Current tab url: <!--ITS JUST FUCKING WORKING!-->
+					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)">THIS TAB COUB</a> 🤘🏻
 
 					<br clear="all" />
 
@@ -53,7 +53,8 @@
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
-							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a> ({{dataUser.current_channel.followers_count}}) (<span class="orangered">{{dataUser.current_channel.following_count}}</span>)
+							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a>
+							({{dataUser.current_channel.followers_count}}) (<span class="orangered">{{dataUser.current_channel.following_count}}</span>)
 
 							<br>
 
@@ -61,7 +62,7 @@
 
 							<br>
 
-							<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed">Mark All Readed 🎈</a>
+							<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed">Mark All Readed</a> 🎈
 
 						</span>
 
@@ -71,10 +72,7 @@
 
 							<!--@TODO hide if no have notifications-->
 							<!--<pre data-ng-bind="dataNotification | json"></pre>-->
-
-<!--
-							<pre data-ng-bind="followStatus | json"></pre>
--->
+							<!--<pre data-ng-bind="followStatus | json"></pre>-->
 
 							<span data-ng-repeat="notif in dataNotification">
 								<!--<pre data-ng-bind="notif.kind | json"></pre>-->
@@ -82,8 +80,10 @@
 									<!--KIND-->
 									event:<span class="orangered">{{notif.kind}}</span>
 
+									<br>
+
 									<!--ICONS-->
-									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!! </span>
+									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
 
 									<span data-ng-if="notif.kind == 'like'"><img class="likeExt" src="icon_connect.png" /> </span>
 
@@ -101,44 +101,68 @@
 
 									<br>
 
+									<!--  🤘🏻  🤘🏻  🤘🏻   -->
 									<span class="content gray">
 
 										<!--User's i not follow him actions-->
-										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
+										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 
+											<!-- + + +  -->
 											<a href="javascript:void(0)" class="backgroundPic" data-ng-click="
 												follow(dataUser.current_channel.id, notifS.id)
 											" title="follow him">+<span data-ng-if="
 												followStatus[0] == notifS.id && followStatus[1] == 'ok'
 											">ok</span></a>
 
-											<img src="images/avatar-svg.png" data-ng-if="
+											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
-											" />
+											">
+												<img class="avatar-svg" src="images/avatar-svg.png" />
+											</span>
 
-											<img data-ng-if="
+											<span data-ng-if="
 												notifS.avatar_versions.template.replace('%{version}', 'small') != ''
-											" data-ng-src="
-											{{notifS.avatar_versions.template.replace('%{version}', 'small')}}" />
+											">
+												<img class="avatar" data-ng-src="
+													{{notifS.avatar_versions.template.replace('%{version}', 'small')}}
+												" />
+											</span>
 
-											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
-											<span class="orangered"> 🤘🏻 </span>(<span class="orangered">{{notifS.followers_count}}</span>)
+											<a href="http://coub.com/{{notifS.permalink}}" class="title">{{notifS.title}}</a>
+
+											<!--  -->
+											<span data-ng-if="
+												notifS.follows_by_users_channels.length > 0
+											" class="orangered userPosition">{{notifS.follows_by_users_channels.length}} 🤘🏻 ({{notifS.followers_count}})</span>
+											<span data-ng-if="
+												notifS.follows_by_users_channels.length == 0
+											" class="orangered youNotFollow userPosition">{{notifS.follows_by_users_channels.length}} 🤘🏻 ({{notifS.followers_count}})</span>
 
 											<br>
 
 										</span>
 
 										<!--User's i follow him actions-->
-										<span data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
+										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
 
-											<img src="images/avatar-svg.png" data-ng-if="
+											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
-											" />
+											">
+												<img class="avatar-svg" src="images/avatar-svg.png" />
+											</span>
 
-											<img data-ng-if="notifS.avatar_versions.template.replace('%{version}', 'small') != ''" data-ng-src="
-											{{notifS.avatar_versions.template.replace('%{version}', 'small')}}" />
-											<a href="http://coub.com/{{notifS.permalink}}">{{notifS.title}}</a>
-											<span class="orangered"> ❤ </span><span class="orangered" title="{{notifS.followers_count}}">({{notifS.followers_count}})
+											<span data-ng-if="
+												notifS.avatar_versions.template.replace('%{version}', 'small') != ''
+											">
+												<img data-ng-class="avatar" data-ng-src="
+													{{notifS.avatar_versions.template.replace('%{version}', 'small')}}
+												" />
+											</span>
+
+											<a href="http://coub.com/{{notifS.permalink}}" class="title">{{notifS.title}}</a>
+
+											<span class="orangered userPosition" title="{{notifS.followers_count}}">
+												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
 											</span>
 
 											<br>
@@ -153,7 +177,7 @@
 
 						<p>Quick links:</p>
 
-						<a href="http://coub.com">Last viewed COUB 💌</a> <!--@TODO go go!-->
+						<a href="http://coub.com">Last viewed COUB</a> 💌
 
 						<br>
 						<br>
@@ -178,8 +202,11 @@
 
 						<br/>
 
-						<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview 🚬</a><br/>
-						<a href="/options.html" target="_blank" title="Settings">Extention Settings ⚙️</a>
+						<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a> 🚬
+
+						<br/>
+
+						<a href="/options.html" target="_blank" title="Settings">Extention Settings</a> ⚙️
 					</div>
 
 					<!--SAERCH-->
