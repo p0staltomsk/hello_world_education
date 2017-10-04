@@ -6,7 +6,7 @@ if(window.angular === undefined) {
     console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage); /* @TODO, CoubPlayer DEBUS HERE*/
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
-    if(!localStorage.soundLow) // @TODO not work now
+    if(!localStorage.soundLow) // @TODO settings not work now
         localStorage.player_sound_level = "0.15";
 
     /**
@@ -102,10 +102,12 @@ if(window.angular === undefined) {
         /*$scope.missingAvatarUrl         = 'images/avatar-svg.png';*/
         $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
         $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
+        $scope.urlItem                  = 'http:/coub.com/api/v2/coubs/';
         $scope.urlSearch                = 'http://coub.com/api/v2/search?q=';
         $scope.url_foot                 = '&order_by=views_count';
         $scope.dataType                 = 'json';
         $scope.dataNotification         = [];
+        $scope.audioByCode              = [];
         $scope.followStatus             = [];
         $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
         $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
@@ -172,9 +174,12 @@ if(window.angular === undefined) {
 
             /*console.log(localStorage);*/
 
-            if(!localStorage.lastData){
+            if(!localStorage.lastData) {
+
                 console.log('no last data');
+
             } else {
+
                 console.log('has last data'/*, JSON.parse(localStorage.lastData)*/);
 
                 /**
@@ -182,9 +187,29 @@ if(window.angular === undefined) {
                  */
                 angular.forEach(JSON.parse(localStorage.lastData), function (field, key) {
 
-                    if(field.important === true)
+                    if(field.important === true) {
+
                         $scope.dataNotification.push(field);
+
+                        $http({
+                            method:     $scope.method,
+                            url:        $scope.urlItem + field.object.permalink,
+                            dataType:   $scope.dataType
+                        }).
+                        then(function(response) {
+
+                            $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url]);
+
+                        }, function(response) {
+                            /*
+                            * Trow here
+                            * */
+                        });
+                        //
+                    }
                 });
+
+                console.log($scope.audioByCode);
             }
         }
 

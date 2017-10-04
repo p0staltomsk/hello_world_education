@@ -49,7 +49,7 @@
 
 							<img data-ng-src="{{dataChannelBachground}}" class="backgroundPicExt" />
 
-							<!--<pre data-ng-bind="dataUser.views_count | json"></pre>-->
+							<!--<pre data-ng-bind="audioByCode | json"></pre>-->
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
@@ -68,17 +68,27 @@
 
 						<span data-ng-if="dataNotification">
 
-							<p>Activity log from ALL channel's:</p>
+							<p data-ng-if="dataNotification.length > 0">Activity log from ALL channel's:</p>
 
-							<!--@TODO hide if no have notifications-->
 							<!--<pre data-ng-bind="dataNotification | json"></pre>-->
 							<!--<pre data-ng-bind="followStatus | json"></pre>-->
 
 							<span data-ng-repeat="notif in dataNotification">
+
 								<!--<pre data-ng-bind="notif.kind | json"></pre>-->
+
 								<p>
 									<!--KIND entity_type-->
 									<span class="orangered">{{notif.entity_type}} {{notif.kind}}</span>
+									<span class="">{{notif.id}}</span>
+
+									<!-- audio links 🤙🤙🤙 -->
+									<span data-ng-repeat="audio in audioByCode">
+										<span data-ng-if="
+											notif.object.permalink == audio[0] &&
+											audio[1] != null
+										"><a href="{{audio[1]}}" target="_blank">{{audio[0]}} audio</a></span><!--@TODO bug duble here-->
+									</span>
 
 									<br>
 
