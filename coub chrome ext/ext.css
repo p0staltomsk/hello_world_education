@@ -12,7 +12,13 @@ h1{font-weight:200;font-size:44px}
 h2{font-weight:200;font-size:37px}
 h3{font-weight:500;font-size:27px}
 h4{font-weight:500;font-size:23px}
-h5{font-weight:400;line-height:16px;font-size:12px}
+h5{
+    font-weight:400;
+    line-height:16px;
+    font-size:12px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
 h5 a{text-decoration:none}
 form{margin:0 0 1em}
 p,ul{margin-bottom: 10px; font-weight: 400; font-size: 14px; line-height: 1.4; color: #777;}
@@ -59,3 +65,4 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .recoubExt {width: 10px; height: 10px;}
 .followExt {width: 16px; height: 16px;}
 .otherExt {width: 16px; height: 16px;}
+.coubPic {width: 100%; height: 100% auto;}

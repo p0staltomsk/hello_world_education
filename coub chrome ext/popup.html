@@ -36,7 +36,7 @@
 					<br>
 
 					Current tab url: <!--ITS JUST FUCKING WORKING!-->
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)">THIS TAB COUB</a> 🤘🏻
+					<h5><a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)">THIS TAB COUB</a> 🤘🏻</h5>
 
 					<br clear="all" />
 
@@ -82,6 +82,13 @@
 
 									<br>
 
+									<span data-ng-if="
+										notif.object.image_versions.template.replace('%{version}', 'micro_2x') != ''
+									">
+										<img class="coubPic" data-ng-src="{{notif.object.image_versions.template.replace('%{version}', 'micro_2x')}}" />
+										<br>
+									</span>
+
 									<!--ICONS-->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
 
@@ -124,6 +131,7 @@
 													🤙 ({{notifS.followers_count}})
 												</span>
 
+												<!-- follows_by_users_channels.length == 0 -->
 												<span data-ng-if="
 													notifS.follows_by_users_channels.length == 0
 												" class="orangered youNotFollow userPosition">
@@ -155,6 +163,10 @@
 										<!--User's i follow him actions-->
 										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
 
+											<span class="orangered backgroundPicExt" title="{{notifS.followers_count}}">
+												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
+											</span>
+
 											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
 											">
@@ -170,10 +182,6 @@
 											</span>
 
 											<a href="http://coub.com/{{notifS.permalink}}" class="title">{{notifS.title}}</a>
-
-											<span class="orangered userPosition" title="{{notifS.followers_count}}">
-												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
-											</span>
 
 											<br>
 
