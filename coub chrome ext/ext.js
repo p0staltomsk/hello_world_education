@@ -1,25 +1,30 @@
+/**
+ *  NOW WORK IN COUB.COM SITE
+ */
 if(window.angular === undefined) {
 
     /**
      *  If Coub.com tab
+     *  @TODO, CoubPlayer DEBUS HERE
      */
-    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage); /* @TODO, CoubPlayer DEBUS HERE*/
+    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
-    if(!localStorage.soundLow) // @TODO settings not work now
-        localStorage.player_sound_level = "0.15";
-
     /**
-     *  localStorage.clear();
+     *  @TODO settings not work now, DO IT NEXT TIME
      */
+    if(!localStorage.soundLow) {
+        localStorage.player_sound_level = "0.15";
+    }
 
     /**
-     *  @desc Modify coub.com CSS
+     *  @desc Modify coub.com CSS, just fun modding, sorry ;D
      * @type {{type: string, style: Element, content: string, append: script.append}}
      */
     var script = {
 
-        type: 'text/css', style: document.createElement('style'),
+        type: 'text/css',
+        style: document.createElement('style'),
         content: "" +
         ".viewer__hand, #hs-beacon {display:none !important;} " +
         ".coub__description{background-color:#f8f8f8 !important;} " +
@@ -28,16 +33,17 @@ if(window.angular === undefined) {
         ".-color--emperor {color:orangered !important;}" +
         "",
         append: function() {
-
             this.style.type = this.type;
             this.style.appendChild(document.createTextNode(this.content));
             document.head.appendChild(this.style);
-
         }
     };
 
     script.append();
 
+    /**
+     *  NOW WOR IN EXT APP NAMESPACE
+     */
 } else {
 
     /**
@@ -46,60 +52,51 @@ if(window.angular === undefined) {
     console.log('Coub Ext.js init inside ext! 👊 ext.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 0 });
 
+    /**
+     *  JQUERY HACK FOR FONT SIZES
+     */
     $(document).ready(function(){
-
         $('body').flowtype({
             minimum : 360,
             maximum : 480
         });
-
     });
 
-    /*function getword(info,tab) {
-        console.log("Word " + info.selectionText + " was clicked.");
-        chrome.tabs.create({
-            url: "http://www.google.com/search?q=" + info.selectionText,
-        });
-    }
-    chrome.contextMenus.create({
-        title: "Search: %s",
-        contexts:["selection"],
-        onclick: getword,
-    });*/
-
+    /**
+     *  ANGULAR
+     */
     var app = angular.module('_popup', []);
 
     app.run(function () {});
 
-    app.controller("headPopupCtrl", ['$scope', function ($scope) {
+    /**
+     *  head controller
+     */
+    app.controller("headPopupCtrl", ['$scope', function ($scope)
+    {
         console.log("headPopupCtrl init");
     }]);
 
-    app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http) {
-
+    /**
+     *  body controller
+     */
+    app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http)
+    {
         console.log('PopupCtrl init');
 
+        /**
+         *  GET & SET CURRENT TAB URL TO VAR
+         */
         getCurrentTab().then(function(tab){});
-
-        function getCurrentTab(){
-            return new Promise(function(resolve, reject){
-                chrome.tabs.query({
-                    active: true,               // Select active tabs
-                    lastFocusedWindow: true     // In the current window
-                }, function(tabs) {
-                    resolve(tabs[0]);
-                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
-                });
-            });
-        }
 
         $scope.page                     = 1;
         $scope.per_page                 = 50;
         $scope.method                   = 'GET';
         $scope.methodPost               = 'POST';
+/*
         $scope.response                 = null;
+*/
         $scope.serverUrl                = 'http://coub.com';
-        /*$scope.missingAvatarUrl         = 'images/avatar-svg.png';*/
         $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
         $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
         $scope.urlItem                  = 'http:/coub.com/api/v2/coubs/';
@@ -118,8 +115,8 @@ if(window.angular === undefined) {
         /**
          * Load from storage
          */
-        $scope.loadOptions = function() {
-
+        $scope.loadOptions = function()
+        {
             /*
             * Get coub account and channels info
             * */
@@ -150,37 +147,30 @@ if(window.angular === undefined) {
                             $scope.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
                             localStorage.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
                         }
-                        /*console.log($scope.dataChannelBachground);*/
-                        /*console.log(field.background_coub);
-                        console.log(field.background_coub.audio_file_url);*/
                     }
                 });
 
                 /**
                  *  save user pic and cache
                  */
-
                 localStorage.dataUser = JSON.stringify(response.data);
                 $scope.dataUser = response.data;
-
                 localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
                 $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
 
-            }, function(response) {
+            }, function(data) {
                 /*
                 * Trow here
                 * */
             });
 
-            /*console.log(localStorage);*/
-
             if(!localStorage.lastData) {
 
-                console.log('no last data');
+                /*console.log('no last data');*/
 
             } else {
 
-                console.log('has last data'/*, JSON.parse(localStorage.lastData)*/);
+                /*console.log('has last data'/!*, JSON.parse(localStorage.lastData)*!/);*/
 
                 /**
                  * 	Only important events need
@@ -190,30 +180,8 @@ if(window.angular === undefined) {
                     if(field.important === true) {
 
                         $scope.dataNotification.push(field);
-
-                        $http({
-                            method:     $scope.method,
-                            url:        $scope.urlItem + field.object.permalink,
-                            dataType:   $scope.dataType
-                        }).
-                        then(function(response) {
-
-/*
-                            console.log(response.data);
-*/
-
-                            $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url, response.data.file_versions.mobile.audio[1]]);
-
-                        }, function(response) {
-                            /*
-                            * Trow here
-                            * */
-                        });
-                        //
                     }
                 });
-
-                chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
 
                 console.log($scope.audioByCode);
             }
@@ -234,7 +202,7 @@ if(window.angular === undefined) {
         }).
         then(function(response) {
 
-            /*console.log(response.data.notifications);*/
+            /*console.log(localStorage);*/
 
             $scope.dataNotification = [];
 
@@ -243,20 +211,40 @@ if(window.angular === undefined) {
              */
             angular.forEach(response.data.notifications, function (field, key) {
 
-                if(field.important === true)
+                if(field.important === true) { /* && localStorage.showOnlyImportant === true*/
+
                     $scope.dataNotification.push(field);
+
+                    /**
+                     *	get mp3 path's
+                     */
+                    $http({
+                        method:     $scope.method,
+                        url:        $scope.urlItem + field.object.permalink,
+                        dataType:   $scope.dataType
+                    }).
+                    then(function(response) {
+
+                        $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url, response.data.file_versions.mobile.audio[1]]);
+
+                    }, function(data) {
+                        /*
+                        * Trow here
+                        * */
+                    });
+                }
             });
 
-        }, function(response) {
+            chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
+
+        }, function(data) {
             /*
             * Trow here
             * */
         });
 
-        /*console.log( $scope.dataNotification );*/
-
         /**
-         *
+         *  counter
          */
         if($scope.important !== undefined) {
 
@@ -275,8 +263,8 @@ if(window.angular === undefined) {
         /**
          *  markAllReaded
          */
-        $scope.markAllReaded = function () {
-
+        $scope.markAllReaded = function ()
+        {
             /**
              *  markAllReaded
              */
@@ -288,7 +276,7 @@ if(window.angular === undefined) {
 
                 console.log(response.data);
 
-            }, function (response) {
+            }, function (data) {
 
                 /*
                 * Trow here
@@ -299,8 +287,8 @@ if(window.angular === undefined) {
         /**
          *  follow to user
          */
-        $scope.follow = function ($channelId, $userId) {
-
+        $scope.follow = function ($channelId, $userId)
+        {
             /**
              *  DO FOLLOW
              */
@@ -310,61 +298,39 @@ if(window.angular === undefined) {
                 headers: ''
             }).then(function (response) {
 
-                if(response.data.status)
-                    $scope.followStatus = [$userId,"ok"];
+                if(response.data.status) {
+                    $scope.followStatus = [$userId, "ok"];
+                }
 
-            }, function (response) {
+            }, function (data) {
 
-                $scope.followStatus = [$userId,"false"]
-                /*
-                * Trow here
-                * */
+                $scope.followStatus = [$userId, "false"];
             });
         }
 
         /**
          *  unfollow to user
+         *  @TODO go
          */
-        $scope.unfollow = function ($channelId, $userId) {
-
+        $scope.unfollow = function ($channelId, $userId)
+        {
             console.log('UNFOLLOW DEBUG',$channelId, $userId);
-
-            /**
-             *  DO UNFOLLOW
-             */
-            /*$http({
-                method: $scope.methodPost,
-                url: $scope.serverUrl + '/api/v2/follows?id=' + $userId + '&channel_id=' + $channelId,
-                headers: ''
-            }).then(function (response) {
-
-                console.log(response.data);
-
-            }, function (response) {
-
-                /!*
-                * Trow here
-                * *!/
-            });*/
         }
 
         /**
          *  follow to user
+         *  @TODO what is it?
          */
-        $scope.tryMakeCoub = function ($serverCTU) {
-
-            /*<!-- @TODO editor_create_pasteALinkScreen_fromClipboard -->
-            <!-- http://coub.com/create input-field -rn https://www.youtube.com/watch?v=e1PFFPjzIgc -->*/
-
+        $scope.tryMakeCoub = function ($serverCTU)
+        {
             console.log($serverCTU);
-            /*location.href='http://coub.com';*/
         }
 
         /**
          *  Search by name now
          */
-        $scope.searchFunc = function () {
-
+        $scope.searchFunc = function ()
+        {
             /**
              *  DO SEARCH
              */
@@ -380,14 +346,34 @@ if(window.angular === undefined) {
                 /* chrome.browserAction.setBadgeBackgroundColor({ color: [127, 0, 0, 255] });
                 chrome.browserAction.setBadgeText({text: cnt.toString()}); */
 
-            }, function (response) {
-
+            }, function (data) {
                 /*
                 * Trow here
                 * */
             });
         }
+
+        /**
+         *  SET CURRENT TAB URL TO VAR
+         * @returns {Promise}
+         */
+        function getCurrentTab()
+        {
+            return new Promise(function(resolve, reject) {
+                chrome.tabs.query({
+                    active: true,               // Select active tabs
+                    lastFocusedWindow: true     // In the current window
+                }, function(tabs) {
+                    resolve(tabs[0]);
+                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
+                });
+            });
+        }
+
     }]);
 
+    /**
+     *  set ext Icon
+     */
     chrome.browserAction.setIcon({path:"icon.png"});
 }

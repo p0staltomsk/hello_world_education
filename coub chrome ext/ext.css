@@ -47,12 +47,20 @@ ul li{margin-left:5px;list-style-position:inside}
 .clear{display:block;clear:both}
 table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 
+/**/
 .header.container table td.logo,.column tr td{padding:15px}
 .goCoub, .createCoub{float: right; margin-right: 10px;}
 .orangered{color: orangered;}
 .gray{background: #ececec; padding-top: 10px;}
 .backgroundPicExt{color: orangered; float: right; margin-top: 20px; clear: both;}
-.avatar-svg, .avatarExt {max-width: 38px;max-height: 38px;}
+.avatar-svg {
+    max-width: 34px;
+    max-height: 34px;
+}
+.avatarExt {
+    max-width: 38px;
+    max-height: 38px;
+}
 .hideExt {display: none;}
 .youNotFollow {
     font-size: 16px;
@@ -62,6 +70,7 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 
 /*  */
 .likeExt {width: 5px; height: 10px;}
+.linkExt {font-size: 14px;}
 .recoubExt {width: 10px; height: 10px;}
 .followExt {width: 16px; height: 16px;}
 .otherExt {width: 16px; height: 16px;}

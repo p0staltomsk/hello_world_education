@@ -7,13 +7,15 @@ app.controller("OptionsCtrl", ['$scope', function ($scope) {
     console.log('OptionsCtrl init');
 
     /**
+     *  @TODO USE IT
      *  localStorage.clear();
      */
     $scope.loadOptions = function() {
         console.log(localStorage);
-        $scope.hideHand         = localStorage.hideHand;
-        $scope.hideChatIcon     = localStorage.hideChatIcon;
-        $scope.soundLow         = localStorage.soundLow;
+        $scope.hideHand             = localStorage.hideHand;
+        $scope.hideChatIcon         = localStorage.hideChatIcon;
+        $scope.soundLow             = localStorage.soundLow;
+        $scope.showOnlyImportant    = localStorage.showOnlyImportant;
     }
 
     /**
@@ -29,6 +31,9 @@ app.controller("OptionsCtrl", ['$scope', function ($scope) {
 
         var field = document.getElementById("soundLow");
         localStorage.soundLow = field.checked;
+
+        var field = document.getElementById("showOnlyImportant");
+        localStorage.showOnlyImportant = field.checked;
     }
 
     $scope.loadOptions();
