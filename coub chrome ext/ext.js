@@ -72,9 +72,32 @@ if(window.angular === undefined) {
     /**
      *  head controller
      */
-    app.controller("headPopupCtrl", ['$scope', function ($scope)
+    app.controller("headPopupCtrl", ['$scope', '$http', function ($scope, $http)
     {
         console.log("headPopupCtrl init");
+
+        /**
+         *  GET & SET CURRENT TAB URL TO VAR
+         */
+        getCurrentTab().then(function(tab){});
+
+        /**
+         *  SET CURRENT TAB URL TO VAR
+         * @returns {Promise}
+         */
+        function getCurrentTab()
+        {
+            return new Promise(function(resolve, reject) {
+                chrome.tabs.query({
+                    active: true,                   // Select active tabs
+                    lastFocusedWindow: true         // In the current window
+                }, function(tabs) {
+                    resolve(tabs[0]);
+                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
+                });
+            });
+        }
+
     }]);
 
     /**
@@ -84,18 +107,10 @@ if(window.angular === undefined) {
     {
         console.log('PopupCtrl init');
 
-        /**
-         *  GET & SET CURRENT TAB URL TO VAR
-         */
-        getCurrentTab().then(function(tab){});
-
         $scope.page                     = 1;
         $scope.per_page                 = 50;
         $scope.method                   = 'GET';
         $scope.methodPost               = 'POST';
-/*
-        $scope.response                 = null;
-*/
         $scope.serverUrl                = 'http://coub.com';
         $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
         $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
@@ -104,8 +119,10 @@ if(window.angular === undefined) {
         $scope.url_foot                 = '&order_by=views_count';
         $scope.dataType                 = 'json';
         $scope.dataNotification         = [];
-        $scope.audioByCode              = [];
         $scope.followStatus             = [];
+        $scope.audioByCode              = [];
+        $scope.arrPermalinkData         = [];
+        $scope.bgLoading                = true;
         $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
         $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
         $scope.logData                  = (localStorage.logData)                ? JSON.parse(localStorage.logData)          : '';
@@ -164,6 +181,113 @@ if(window.angular === undefined) {
                 * */
             });
 
+            /**
+             *  GET NOFIFICATIONS
+             */
+            $http({
+                method: $scope.method,
+                url: $scope.urlNotifications + '?page='+$scope.page + '&per_page=' + $scope.per_page, // http://coub.com/dev/docs/Coub+API/Notifications
+                dataType: $scope.dataType
+            }).
+            then(function(response) {
+
+                /*console.log(localStorage);*/
+
+                $scope.dataNotification = [];
+                var objData = {};
+                var cnt = 0;
+
+                /**
+                 * 	Only important events need
+                 */
+                angular.forEach(response.data.notifications, function (field, key) {
+
+                    if(field.important === true) { /* && localStorage.showOnlyImportant === true*/
+
+                        $scope.dataNotification.push(field);
+
+                        /**
+                         *	get mp3 path's
+                         */
+                        $http({
+                            method:     $scope.method,
+                            url:        $scope.urlItem + field.object.permalink,
+                            dataType:   $scope.dataType
+                        }).
+                        then(function(response) {
+
+                            $scope.arrPermalinkData.push(response.data);
+
+                            var audio;
+                            audio = [
+                                field.object.permalink,
+                                response.data.audio_file_url,
+                                response.data.file_versions.mobile.audio[1]
+                            ];
+
+                            objData[cnt] = audio;
+                            $scope.audioByCode.push(audio);
+
+                            cnt++;
+
+                        }, function(data) {
+                            /*
+                            * Trow here
+                            * */
+                        });
+                    }
+
+                    /**
+                     *
+                     */
+                    if((key - 1) == response.data.notifications.length) {
+
+                        $scope.bgLoading = true;
+
+                        // firing an event downwards
+                        /*$scope.$broadcast('myCustomEvent', $scope.bgLoading);
+                        $scope.$emit('myCustomEvent', $scope.bgLoading);*/
+                    }
+                });
+
+                // listen for the event in the relevant $scope
+                $scope.$on('myCustomEvent', function (event, data) {
+
+                    console.log("HUI",data);
+
+                    /*localStorage.setItem("audioByCode", JSON.stringify(objData));
+                    console.log($scope.arrPermalinkData, objData, $scope.bgLoading);*/
+
+
+                });
+
+                /*console.log($scope.bgLoading);*/
+
+                chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
+
+            }, function(data) {
+                /*
+                * Trow here
+                * */
+            });
+
+            /**
+             *  counter
+             */
+            if($scope.important !== undefined) {
+
+                chrome.browserAction.setBadgeBackgroundColor({color: 'gray'});
+
+                if ($scope.important > 20)
+                    chrome.browserAction.setBadgeBackgroundColor({color: 'green'});
+                if ($scope.important > 40)
+                    chrome.browserAction.setBadgeBackgroundColor({color: 'pink'});
+                if ($scope.important > 80)
+                    chrome.browserAction.setBadgeBackgroundColor({color: 'red'});
+
+                chrome.browserAction.setBadgeText({text: $scope.important.toString()});
+            }
+
             if(!localStorage.lastData) {
 
                 /*console.log('no last data');*/
@@ -178,12 +302,9 @@ if(window.angular === undefined) {
                 angular.forEach(JSON.parse(localStorage.lastData), function (field, key) {
 
                     if(field.important === true) {
-
                         $scope.dataNotification.push(field);
                     }
                 });
-
-                console.log($scope.audioByCode);
             }
         }
 
@@ -191,74 +312,6 @@ if(window.angular === undefined) {
          *	get storage
          */
         $scope.loadOptions();
-
-        /**
-         *
-         */
-        $http({
-            method: $scope.method,
-            url: $scope.urlNotifications + '?page='+$scope.page + '&per_page=' + $scope.per_page, // http://coub.com/dev/docs/Coub+API/Notifications
-            dataType: $scope.dataType
-        }).
-        then(function(response) {
-
-            /*console.log(localStorage);*/
-
-            $scope.dataNotification = [];
-
-            /**
-             * 	Only important events need
-             */
-            angular.forEach(response.data.notifications, function (field, key) {
-
-                if(field.important === true) { /* && localStorage.showOnlyImportant === true*/
-
-                    $scope.dataNotification.push(field);
-
-                    /**
-                     *	get mp3 path's
-                     */
-                    $http({
-                        method:     $scope.method,
-                        url:        $scope.urlItem + field.object.permalink,
-                        dataType:   $scope.dataType
-                    }).
-                    then(function(response) {
-
-                        $scope.audioByCode.push([field.object.permalink, response.data.audio_file_url, response.data.file_versions.mobile.audio[1]]);
-
-                    }, function(data) {
-                        /*
-                        * Trow here
-                        * */
-                    });
-                }
-            });
-
-            chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
-
-        }, function(data) {
-            /*
-            * Trow here
-            * */
-        });
-
-        /**
-         *  counter
-         */
-        if($scope.important !== undefined) {
-
-            chrome.browserAction.setBadgeBackgroundColor({color: 'gray'});
-
-            if ($scope.important > 20)
-                chrome.browserAction.setBadgeBackgroundColor({color: 'green'});
-            if ($scope.important > 40)
-                chrome.browserAction.setBadgeBackgroundColor({color: 'pink'});
-            if ($scope.important > 80)
-                chrome.browserAction.setBadgeBackgroundColor({color: 'red'});
-
-            chrome.browserAction.setBadgeText({text: $scope.important.toString()});
-        }
 
         /**
          *  markAllReaded
@@ -277,7 +330,6 @@ if(window.angular === undefined) {
                 console.log(response.data);
 
             }, function (data) {
-
                 /*
                 * Trow here
                 * */
@@ -343,30 +395,10 @@ if(window.angular === undefined) {
                 $scope.model = response;
                 console.log(response);
 
-                /* chrome.browserAction.setBadgeBackgroundColor({ color: [127, 0, 0, 255] });
-                chrome.browserAction.setBadgeText({text: cnt.toString()}); */
-
             }, function (data) {
                 /*
                 * Trow here
                 * */
-            });
-        }
-
-        /**
-         *  SET CURRENT TAB URL TO VAR
-         * @returns {Promise}
-         */
-        function getCurrentTab()
-        {
-            return new Promise(function(resolve, reject) {
-                chrome.tabs.query({
-                    active: true,               // Select active tabs
-                    lastFocusedWindow: true     // In the current window
-                }, function(tabs) {
-                    resolve(tabs[0]);
-                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
-                });
             });
         }
 
