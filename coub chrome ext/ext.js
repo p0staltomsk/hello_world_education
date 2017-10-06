@@ -76,28 +76,6 @@ if(window.angular === undefined) {
     {
         console.log("headPopupCtrl init");
 
-        /**
-         *  GET & SET CURRENT TAB URL TO VAR
-         */
-        getCurrentTab().then(function(tab){});
-
-        /**
-         *  SET CURRENT TAB URL TO VAR
-         * @returns {Promise}
-         */
-        function getCurrentTab()
-        {
-            return new Promise(function(resolve, reject) {
-                chrome.tabs.query({
-                    active: true,                   // Select active tabs
-                    lastFocusedWindow: true         // In the current window
-                }, function(tabs) {
-                    resolve(tabs[0]);
-                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
-                });
-            });
-        }
-
     }]);
 
     /**
@@ -257,8 +235,6 @@ if(window.angular === undefined) {
 
                     /*localStorage.setItem("audioByCode", JSON.stringify(objData));
                     console.log($scope.arrPermalinkData, objData, $scope.bgLoading);*/
-
-
                 });
 
                 /*console.log($scope.bgLoading);*/
@@ -399,6 +375,28 @@ if(window.angular === undefined) {
                 /*
                 * Trow here
                 * */
+            });
+        }
+
+        /**
+         *  GET & SET CURRENT TAB URL TO VAR
+         */
+        getCurrentTab().then(function(tab){});
+
+        /**
+         *  SET CURRENT TAB URL TO VAR
+         * @returns {Promise}
+         */
+        function getCurrentTab()
+        {
+            return new Promise(function(resolve, reject) {
+                chrome.tabs.query({
+                    active: true,                   // Select active tabs
+                    lastFocusedWindow: true         // In the current window
+                }, function(tabs) {
+                    resolve(tabs[0]);
+                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
+                });
             });
         }
 
