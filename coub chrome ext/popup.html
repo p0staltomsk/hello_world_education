@@ -23,9 +23,9 @@
 				<td class="container" ng-cloak>
 
 					<!--HOT LINKS & MAKE COUB-->
-					<a href="http://coub.com/create" class="createCoub">Make COUB</a>
-					<a href="http://coub.com/likes" class="goCoub">Likes log</a>
-					<a href="http://coub.com/explore/hot" class="goCoub">Hot log</a>
+					<a href="http://coub.com/create" class="createCoub linkExt">Make COUB</a>
+					<a href="http://coub.com/likes" class="goCoub linkExt">Likes log</a>
+					<a href="http://coub.com/explore/hot" class="goCoub linkExt">Hot log</a>
 
 					<br clear="all" />
 
@@ -36,7 +36,7 @@
 					<br>
 
 					Current tab url: <!--ITS JUST FUCKING WORKING!-->
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)">THIS TAB COUB</a> 🤘🏻
+					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt">THIS TAB COUB</a> 🤘🏻
 
 					<br clear="all" />
 
@@ -49,7 +49,7 @@
 
 							<img data-ng-src="{{dataChannelBachground}}" class="backgroundPicExt" />
 
-							<!--<pre data-ng-bind="dataUser.views_count | json"></pre>-->
+							<!--<pre data-ng-bind="audioByCode | json"></pre>-->
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
@@ -62,25 +62,53 @@
 
 							<br>
 
-							<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed">Mark All Readed</a> 🎈
+							<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
 
 						</span>
 
 						<span data-ng-if="dataNotification">
 
-							<p>Activity log from ALL channel's:</p>
+							<p data-ng-if="dataNotification.length > 0">Activity log from ALL channel's:</p>
 
-							<!--@TODO hide if no have notifications-->
 							<!--<pre data-ng-bind="dataNotification | json"></pre>-->
 							<!--<pre data-ng-bind="followStatus | json"></pre>-->
 
 							<span data-ng-repeat="notif in dataNotification">
+
 								<!--<pre data-ng-bind="notif.kind | json"></pre>-->
+
 								<p>
 									<!--KIND entity_type-->
 									<span class="orangered">{{notif.entity_type}} {{notif.kind}}</span>
+									<!--<span class="">{{notif.id}}</span>-->
 
 									<br>
+
+									<!-- audio links 🤙🤙🤙 -->
+									<span data-ng-repeat="audio in audioByCode">
+
+										<!-- web src -->
+										<span data-ng-if="
+											notif.object.permalink == audio[0] &&
+											audio[1] != null
+										"><a href="{{audio[1]}}" target="_blank">{{audio[0]}} audio</a></span><!--@TODO bug duble here-->
+
+										<!-- mobile src -->
+										<span data-ng-if="
+											notif.object.permalink == audio[0] &&
+											audio[1] == null &&
+											audio[2] != null
+										"><a href="{{audio[2]}}" target="_blank">{{audio[0]}} audio</a></span>
+									</span>
+
+									<br>
+
+									<span data-ng-if="
+										notif.object.image_versions.template.replace('%{version}', 'micro_2x') != ''
+									">
+										<img class="coubPic" data-ng-src="{{notif.object.image_versions.template.replace('%{version}', 'micro_2x')}}" />
+										<br>
+									</span>
 
 									<!--ICONS-->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
@@ -124,6 +152,7 @@
 													🤙 ({{notifS.followers_count}})
 												</span>
 
+												<!-- follows_by_users_channels.length == 0 -->
 												<span data-ng-if="
 													notifS.follows_by_users_channels.length == 0
 												" class="orangered youNotFollow userPosition">
@@ -132,12 +161,14 @@
 												</span>
 											</a>
 
+											<!--  -->
 											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
 											">
 												<img class="avatar-svg" src="images/avatar-svg.png" />
 											</span>
 
+											<!--  -->
 											<span data-ng-if="
 												notifS.avatar_versions.template.replace('%{version}', 'small') != ''
 											">
@@ -155,12 +186,19 @@
 										<!--User's i follow him actions-->
 										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
 
+											<!--  -->
+											<span class="orangered backgroundPicExt" title="{{notifS.followers_count}}">
+												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
+											</span>
+
+											<!--  -->
 											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
 											">
 												<img class="avatar-svg" src="images/avatar-svg.png" />
 											</span>
 
+											<!--  -->
 											<span data-ng-if="
 												notifS.avatar_versions.template.replace('%{version}', 'small') != ''
 											">
@@ -171,10 +209,6 @@
 
 											<a href="http://coub.com/{{notifS.permalink}}" class="title">{{notifS.title}}</a>
 
-											<span class="orangered userPosition" title="{{notifS.followers_count}}">
-												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
-											</span>
-
 											<br>
 
 										</span>
@@ -182,12 +216,13 @@
 									</span>
 
 								</p>
+
 							</span>
 						</span>
 
 						<p>Quick links:</p>
 
-						<a href="http://coub.com">Last viewed COUB</a> 💌
+						<a href="http://coub.com" class="linkExt">Last viewed COUB</a> 💌
 
 						<br>
 						<br>
@@ -195,28 +230,30 @@
 						Donate this app pls!!!
 
 						<br>
-						Bitcoin (BTC) 🌏 1LZBGorYitWzZHVwUMLQEn3k9wvWTGnB45
+						Bitcoin (BTC) 	🌏 1LZBGorYitWzZHVwUMLQEn3k9wvWTGnB45
 						<br>
 						DopeCoin (DOPE) 💰 DBCPN7gEuAcetW6XquXUitJt9LFxPVsckY
 						<br>
-						Ethereum (ETH) 💎 0xe2bd097096a8f3b91b0700e636a5e89e7fad1ac4
+						Ethereum (ETH) 	💎 0xe2bd097096a8f3b91b0700e636a5e89e7fad1ac4
 						<br>
 						PutinCoin (PUT) 🕯🕯🕯 PBN5KmJT4S5WuQ7NvWwo8teTiBQoivZryB
 						<br>
 						Dogecoin (DOGE) 🐶 DKf4ANCkcLAgpB1qrVAkKT35kbuW2AfPG7
 						<br>
-						Litecoin (LTC) ⭐ LNy2KM7Ui8NNcqp5HeWCygTBq6D4C1a5Pk
-						<br/>
-
-						<a href="https://www.cryptopia.co.nz/Register?referrer=p0staltomsk" target="_blank">https://www.cryptopia.co.nz 💲</a>
+						Litecoin (LTC) 	⭐ LNy2KM7Ui8NNcqp5HeWCygTBq6D4C1a5Pk
 
 						<br/>
+						<br/>
 
-						<a href="http://coub.com/dev/docs/Coub+API/Overview">Coub API Overview</a> 🚬
+						<a href="https://www.cryptopia.co.nz/Register?referrer=p0staltomsk" target="_blank" class="linkExt">https://www.cryptopia.co.nz 💲</a>
 
 						<br/>
 
-						<a href="/options.html" target="_blank" title="Settings">Extention Settings</a> ⚙️
+						<a href="http://coub.com/dev/docs/Coub+API/Overview" class="linkExt">Coub API Overview</a> 🚬
+
+						<br/>
+
+						<a href="/options.html" target="_blank" title="Settings" class="linkExt">Extention Settings</a> ⚙️
 					</div>
 
 					<!--SAERCH-->
@@ -226,7 +263,7 @@
 						<p>Search log from coub.com:</p>
 
 						<div data-ng-repeat="eachItem in logData track by $index">
-							<a href="http://coub.com/search?q={{eachItem.query}}" target="_blank">{{eachItem.query}}</a>
+							<a href="http://coub.com/search?q={{eachItem.query}}" target="_blank" class="linkExt">{{eachItem.query}}</a>
 						</div>
 						</span>
 
