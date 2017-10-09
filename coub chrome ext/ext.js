@@ -410,5 +410,5 @@ if(window.angular === undefined) {
     /**
      *  set ext Icon
      */
-    chrome.browserAction.setIcon({path:"icon.png"});
+    chrome.browserAction.setIcon({path:"logo.png"});
 }
