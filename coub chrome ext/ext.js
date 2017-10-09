@@ -176,6 +176,11 @@ if(window.angular === undefined) {
                 var cnt = 0;
 
                 /**
+                 *	set last data to storage
+                 */
+                localStorage.lastData = JSON.stringify(response.data.notifications);
+
+                /**
                  * 	Only important events need
                  */
                 angular.forEach(response.data.notifications, function (field, key) {
