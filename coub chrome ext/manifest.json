@@ -1,42 +1,16 @@
 {
-    /* Name */
     "name"              : "Coub Chrome Extention beta.",
-
-    /* Desc */
     "description": "Coub.com you chanells notification manage. Some tools.",
-
-    /* Actions */
     "browser_action"    : {
 		"default_icon"  : "icon.png",
 		"default_popup" : "popup.html",
 		"default_title" : "Coub Chrome Extention beta."
 	},
-    /*
-     "page_action" :
-     {
-       "default_icon" : "icon_connect.png",
-       "default_title" : "There's a 'coub.com' in this URL!"
-     },
-     */
-
-    /*  */
 	"background": {
-
-        /* Two way's */
-
 		"page"          : "background.html"
-
-        /*"persistent": false,
-        "scripts": ["sample.js"]*/
 	},
-
-    /*  */
-    "permissions"       : ["tabs"], /*, "contextMenus", "downloads", "downloads.open", "downloads.shelf"*/
-
-    /*  */
+    "permissions"       : ["tabs"],
 	"options_page"      : "options.html",
-
-    /*  */
     "content_scripts": [
       {
         "matches"       : ["http://coub.com/*"],
@@ -44,12 +18,8 @@
         "js"            : ["ext.js"]
       }
 	],
-
-    /*  */
     "manifest_version"  : 2,
     "version"           : "0.6",
-
-    /*  */
     "icons"             : {
         "128"           : "icon.png",
         "777"           : "icon_connect.png"
