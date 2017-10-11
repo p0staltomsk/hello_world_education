@@ -201,6 +201,8 @@ if(window.angular === undefined) {
 
                             $scope.arrPermalinkData.push(response.data);
 
+                            console.log(response.data);
+
                             var audio;
                             audio = [
                                 field.object.permalink,

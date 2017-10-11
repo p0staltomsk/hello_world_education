@@ -5,6 +5,21 @@ my hello_world_education proj
 just make for self-education and traning's
 thanks for read this ;)
 
+Coub channels manage helper.
+
+Coub.com funs extention for manage channels and current url "make COUB" button for more happy creations! 🤑🤑🤑
+
+/*@TODO upd comming soon bcs it's just BETA baby, it's just BETA */
+
+look telegam channel with Education:
+https://t.me/joinchat/Ckg1IkAEBzhAUJuhDs0IJA
+
+and telegram group about features:
+https://t.me/joinchat/Ckg1IgyEJ4RWxydAzWGcnQ
+
+github.com this project link:
+https://github.com/p0staltomsk/hello_world_education/tree/master/coub%20chrome%20ext
+
 Default function's:
 
 <ul>

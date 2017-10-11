@@ -1,10 +1,10 @@
 {
-    "name"              : "Coub Chrome Extention beta.",
-    "description": "Coub.com you chanells notification manage. Some tools.",
+    "name"              : "Coub.com Chrome tools app.",
+    "description"       : "Coub.com you channels notification manager. (Coub.com API based)",
     "browser_action"    : {
 		"default_icon"  : "icon.png",
 		"default_popup" : "popup.html",
-		"default_title" : "Coub Chrome Extention beta."
+		"default_title" : "Coub.com Chrome tools app."
 	},
 	"background": {
 		"page"          : "background.html"
@@ -19,7 +19,7 @@
       }
 	],
     "manifest_version"  : 2,
-    "version"           : "0.666",
+    "version"           : "0.668",
     "icons"             : {
         "128"           : "icon.png",
         "666"           : "logo.png",
