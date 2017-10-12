@@ -14,43 +14,53 @@ app.controller(
 			$interval
 		)
 	{
-
-	/**
-	 * 	JUST LOG HERE
-	 */
-    console.log('BackgroundCtrl init');
-
-	/**
-	 *	call ajax func
-	 */
-	$scope.callAtInterval = function() {
-
         /**
-         *  RUN ONCE SEARCH LOG
+         * 	JUST LOG HERE
          */
-        $http({
-            method: "GET",
-            url: "https://api.coinmarketcap.com/v1/ticker/dopecoin/?convert=BTC",
-            dataType: "json"
-        }).
-        then(function(response) {
+        console.log('BackgroundCtrl init');
 
-            console.log(response.data[0].price_btc.substring(7, 10));
+        $scope.getBTC 	= 'https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=USD';
+        $scope.getDOPE 	= 'https://api.coinmarketcap.com/v1/ticker/dopecoin/?convert=BTC';
+        $scope.nowDOPE 	= 1;
 
-            chrome.browserAction.setBadgeBackgroundColor({ color: 'gray' });
-            chrome.browserAction.setBadgeText({text: response.data[0].price_btc.substring(7, 10).toString()});
+		/**
+		 *	call ajax func
+		 */
+		$scope.callAtInterval = function() {
 
-        }, function(response) {
-            /*
-            * Trow here
-            * */
-        });
-	}
+			/**
+			 *  RUN ONCE SEARCH LOG
+			 */
+			$http({
+				method: "GET",
+				url: ($scope.nowDOPE) ? $scope.getDOPE : $scope.getBTC,
+				dataType: "json"
+			}).
+			then(function(response) {
 
-	/**
-	 *	make Notifications request every minute
-	 */
-	$scope.callAtInterval();
-	$interval( function(){ $scope.callAtInterval(); }, 60000);
+                if($scope.nowDOPE == 1) {
+                    $scope.nowDOPE = 0;
+                    str = response.data[0].price_btc.substring(6, 10).toString();
+                }
+                else {
+                    $scope.nowDOPE = 1;
+                    str = response.data[0].price_usd.substring(0, 4).toString();
+                }
+
+				chrome.browserAction.setBadgeBackgroundColor({ color: 'gray' });
+				chrome.browserAction.setBadgeText({text: str});
+
+			}, function(response) {
+				/*
+				* Trow here
+				* */
+			});
+		}
+
+		/**
+		 *	make Notifications request every minute
+		 */
+		$scope.callAtInterval();
+		$interval( function(){ $scope.callAtInterval(); }, 60000);
 
 }]);
