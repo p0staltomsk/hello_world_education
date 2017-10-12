@@ -10,9 +10,9 @@
 		<script type="text/javascript" src="/ext.js"></script>
 		<base target="_blank" />
 	</head>
-	<body bgcolor="white" class="DOPE" data-ng-controller="PopupCtrl" ng-cloak>
+	<body bgcolor="white" class="DOPE" data-ng-controller="PopupCtrl" data-ng-cloak>
 
-		<div style="width: 200px;" data-ng-if="btcDATA && dopeDATA">
+		<div style="width: 200px;" data-ng-if="btcDATA && dopeDATA" data-ng-cloak>
 			<div data-ng-if="btcDATA">Bitcoin (BTC) {{btcDATA}} USD</div>
 			<div data-ng-if="dopeDATA">DopeCoin (DOPE) 0.0000{{dopeDATA}} BTC</div>
 			<br>

@@ -23,11 +23,14 @@ app.controller(
         $scope.getDOPE 	= 'https://api.coinmarketcap.com/v1/ticker/dopecoin/?convert=BTC';
         $scope.nowDOPE 	= 1;
         $scope.buyAlert = localStorage.buyAlert ? localStorage.buyAlert : '';
+		$scope.karet = '^';
 
 		/**
 		 *	call ajax func
 		 */
 		$scope.callAtInterval = function() {
+
+            $scope.karet = '';
 
 			/**
 			 *  RUN ONCE SEARCH LOG
@@ -45,8 +48,16 @@ app.controller(
                     str = response.data[0].price_btc.substring(6, 10).toString();
                     chrome.browserAction.setBadgeBackgroundColor({ color: 'green' });
 
-                    if($scope.buyAlert < response.data[0].price_btc.substring(7, 10))
-                        alert('buy alert! ' + $scope.buyAlert+' < ' + response.data[0].price_btc.substring(6, 10).toString());
+                    console.log('nowDOPE buyAlert > price_btc', $scope.buyAlert, response.data[0].price_btc.substring(7, 10));
+
+                    if($scope.buyAlert > response.data[0].price_btc.substring(7, 10)) {
+
+                    	alert(
+                            'buy alert! ' +
+                            $scope.buyAlert + ' > ' +
+                            response.data[0].price_btc.substring(7, 10)
+                        );
+                    }
                 }
                 else {
 
@@ -55,7 +66,7 @@ app.controller(
                     chrome.browserAction.setBadgeBackgroundColor({ color: 'orange' });
                 }
 
-				chrome.browserAction.setBadgeText({text: str});
+				chrome.browserAction.setBadgeText({text: str + $scope.karet});
 
 			}, function(response) {
 				/*

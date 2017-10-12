@@ -1,6 +1,6 @@
 {
     "name"              : "DOPE/BTC price right now",
-    "description"       : "DOPE/BTC price right now",
+    "description"       : "DOPE/BTC price right now from api.coinmarketcap.com/v1/ticker",
     "browser_action"    : {
 		"default_icon"  : "icon.png",
 		"default_popup" : "popup.html",
@@ -9,17 +9,9 @@
 	"background": {
 		"page"          : "background.html"
 	},
-    /*"permissions"       : ["tabs"],*/
 	"options_page"      : "options.html",
-    /*"content_scripts": [
-      {
-        "matches"       : ["http://coub.com*//*"],
-        "css"           : ["ext.css"],
-        "js"            : ["ext.js"]
-      }
-	],*/
     "manifest_version"  : 2,
-    "version"           : "0.14",
+    "version"           : "0.15",
     "icons"             : {
         "128"           : "icon.png"
     }

@@ -31,6 +31,8 @@ if(window.angular === undefined) {
         ".coub__views-count span{color:orangered !important;}" +
         ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
         ".-color--emperor {color:orangered !important;}" +
+        /*".intercomButton.active {opacity: 0.3 !important;}" +
+        ".header-channel__notify-badge.box--vertical {opacity: 0.3 !important;}" +*/
         "",
         append: function() {
             this.style.type = this.type;
@@ -311,6 +313,11 @@ if(window.angular === undefined) {
             }).then(function (response) {
 
                 console.log(response.data);
+
+                /**
+                 *	get storage
+                 */
+                $scope.loadOptions();
 
             }, function (data) {
                 /*
