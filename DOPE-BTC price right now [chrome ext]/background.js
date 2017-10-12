@@ -41,13 +41,15 @@ app.controller(
                 if($scope.nowDOPE == 1) {
                     $scope.nowDOPE = 0;
                     str = response.data[0].price_btc.substring(6, 10).toString();
+                    chrome.browserAction.setBadgeBackgroundColor({ color: 'green' });
                 }
                 else {
                     $scope.nowDOPE = 1;
                     str = response.data[0].price_usd.substring(0, 4).toString();
+                    chrome.browserAction.setBadgeBackgroundColor({ color: 'orange' });
                 }
 
-				chrome.browserAction.setBadgeBackgroundColor({ color: 'gray' });
+
 				chrome.browserAction.setBadgeText({text: str});
 
 			}, function(response) {

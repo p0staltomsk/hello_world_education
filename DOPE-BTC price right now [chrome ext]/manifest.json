@@ -1,16 +1,16 @@
 {
-    "name"              : "Dope coin price online",
-    "description"       : "Dope coin price online",
+    "name"              : "DOPE/BTC price right now",
+    "description"       : "DOPE/BTC price right now",
     "browser_action"    : {
 		"default_icon"  : "icon.png",
-		/*"default_popup" : "popup.html",*/
-		"default_title" : "Dope coin price online"
+		"default_popup" : "popup.html",
+		"default_title" : "DOPE/BTC price right now"
 	},
 	"background": {
 		"page"          : "background.html"
 	},
     /*"permissions"       : ["tabs"],*/
-	/*"options_page"      : "options.html",*/
+	"options_page"      : "options.html",
     /*"content_scripts": [
       {
         "matches"       : ["http://coub.com*//*"],
@@ -19,7 +19,7 @@
       }
 	],*/
     "manifest_version"  : 2,
-    "version"           : "0.1",
+    "version"           : "0.14",
     "icons"             : {
         "128"           : "icon.png"
     }
