@@ -22,14 +22,14 @@ app.controller(
         $scope.getBTC 	= 'https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=USD';
         $scope.getDOPE 	= 'https://api.coinmarketcap.com/v1/ticker/dopecoin/?convert=BTC';
         $scope.nowDOPE 	= 1;
-        $scope.buyAlert = localStorage.buyAlert ? localStorage.buyAlert : '';
-		$scope.karet = '^';
 
 		/**
 		 *	call ajax func
 		 */
 		$scope.callAtInterval = function() {
 
+            $scope.buyAlert = localStorage.buyAlert ? localStorage.buyAlert : '';
+            // $scope.karet = '^';
             $scope.karet = '';
 
 			/**
