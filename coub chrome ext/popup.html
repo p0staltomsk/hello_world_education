@@ -123,7 +123,8 @@
 
 									<!--Object-->
 									<span>
-										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
+
+										<b>{{$index+1}}. <a href="{{serverUrl}}{{(notif.object.views_count) ? '/view/' : '/'}}{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
 										({{(notif.object.views_count) ? notif.object.views_count : notif.object.followers_count}})
 									</span>
 
@@ -222,7 +223,7 @@
 
 						<p>Quick links:</p>
 
-						<a href="http://coub.com" class="linkExt">Last viewed COUB</a> 💌
+						<a href="http://coub.com" class="linkExt">Last viewed COUB</a> 💌 next donate do
 
 						<br>
 						<br>

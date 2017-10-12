@@ -13,6 +13,7 @@ app.controller("PopupCtrl", ['$rootScope', '$scope', '$http', function ($rootSco
     $scope.getDOPE 	    = 'https://api.coinmarketcap.com/v1/ticker/dopecoin/?convert=BTC';
     $scope.btcDATA 	    = '';
     $scope.dopeDATA 	= '';
+    $scope.buyAlert = localStorage.buyAlert ? localStorage.buyAlert : '';
 
     /**
      *	call ajax func
@@ -54,7 +55,13 @@ app.controller("PopupCtrl", ['$rootScope', '$scope', '$http', function ($rootSco
             * Trow here
             * */
         });
-    }
+    };
+
+    $scope.change = function() {
+
+        localStorage.buyAlert = $scope.buyAlert = $scope.buyAlert;
+        console.log('change function localStorage.buyAlert', localStorage.buyAlert);
+    };
 
     /**
      *	make Notifications request every minute

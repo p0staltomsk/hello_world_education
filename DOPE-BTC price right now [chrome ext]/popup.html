@@ -12,9 +12,19 @@
 	</head>
 	<body bgcolor="white" class="DOPE" data-ng-controller="PopupCtrl" ng-cloak>
 
-		<div style="width: 200px;">
-			<div>Bitcoin (BTC) {{btcDATA}}$</div>
-			<div>DopeCoin (DOPE) 0.0000{{dopeDATA}} BTC</div>
+		<div style="width: 200px;" data-ng-if="btcDATA && dopeDATA">
+			<div data-ng-if="btcDATA">Bitcoin (BTC) {{btcDATA}} USD</div>
+			<div data-ng-if="dopeDATA">DopeCoin (DOPE) 0.0000{{dopeDATA}} BTC</div>
+			<br>
+			<a href="https://www.coingecko.com/en/price_charts/bitcoin/usd/24_hours" target="_blank">bitcoin/usd/24 Hours/10 Min</a><br>
+			<a href="https://www.coingecko.com/en/price_charts/dopecoin/btc" target="_blank">dopecoin/btc/10 Min</a>
+
 		</div>
+
+		<br>
+		<md-content>
+			<label><input type="text" id="buyAlert" data-ng-model="buyAlert" data-ng-change="change()" /><br>
+				buy alert<span> (Example: 500)</span></label>
+		</md-content>
 	</body>
 </html>
