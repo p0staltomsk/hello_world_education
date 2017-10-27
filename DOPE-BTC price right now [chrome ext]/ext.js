@@ -30,6 +30,8 @@ app.controller("PopupCtrl", ['$rootScope', '$scope', '$http', function ($rootSco
         }).
         then(function(response) {
 
+            console.log(response.data[0].last_updated, response.data[0].percent_change_1h);
+
             $scope.btcDATA = response.data[0].price_usd.substring(0, 4).toString();
 
         }, function(response) {

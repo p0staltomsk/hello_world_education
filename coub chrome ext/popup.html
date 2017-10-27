@@ -124,7 +124,11 @@
 									<!--Object-->
 									<span>
 
-										<b>{{$index+1}}. <a href="{{serverUrl}}{{(notif.object.views_count) ? '/view/' : '/'}}{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
+										<b>{{$index+1}}. <a href="
+											{{serverUrl}}
+											{{(notif.object.views_count && !notif.object.followers_count) ? '/view/' : '/'}}
+											{{notif.object.permalink}}
+										" target="_blank">{{notif.object.title}}</a></b>
 										({{(notif.object.views_count) ? notif.object.views_count : notif.object.followers_count}})
 									</span>
 
