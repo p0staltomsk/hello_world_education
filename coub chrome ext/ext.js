@@ -3,39 +3,45 @@
  */
 if(window.angular === undefined) {
 
-    // 1. Создаём новый объект XMLHttpRequest
-    var xhr = new XMLHttpRequest();
-    var url = 'http://coub.com/api/v2/coubs/7zdaq';
+    var permalink = window.location.pathname.replace('/view/', '');
+    var where = permalink.search('/');
 
-    // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-    xhr.open('GET', url, false);
+    if (where == '-1') {
 
-    // 3. Отсылаем запрос
-    xhr.send();
+        // 1. Создаём новый объект XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        var url = 'http://coub.com/api/v2/coubs/' + permalink;
 
-    // 4. Если код ответа сервера не 200, то это ошибка
-    if (xhr.status != 200) {
+        // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+        xhr.open('GET', url, false);
 
-        // обработать ошибку
-        console.log( 'обработать ошибку xhr.send();', xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+        // 3. Отсылаем запрос
+        xhr.send();
 
-    } else {
+        // 4. Если код ответа сервера не 200, то это ошибка
+        if (xhr.status != 200) {
 
-        var coubInfo    =   JSON.parse(xhr.responseText);
-        var link        =   coubInfo.file_versions.mobile.audio[0];
-        var changeText  =   document.getElementsByClassName('coub__views-count')[0] ?
-            document.getElementsByClassName('coub__views-count')[0].childNodes[0] :
-            null;
-            if(document.getElementsByClassName('coub__views-count')[0]) {
+            // обработать ошибку
+            console.log('обработать ошибку xhr.send();', xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+
+        } else {
+
+            var coubInfo = JSON.parse(xhr.responseText);
+            var link = coubInfo.file_versions.mobile.audio[0];
+            var changeText = document.getElementsByClassName('coub__views-count')[0] ?
+                document.getElementsByClassName('coub__views-count')[0].childNodes[0] :
+                null;
+            if (document.getElementsByClassName('coub__views-count')[0]) {
                 changeText.innerHTML = changeText.innerHTML + ' <a href="' + link + '" target="_blank">🎧</a>';
             }
 
-        // вывести результат
-        console.log(
-            'вывести результат xhr.send();',
-            coubInfo.file_versions.mobile.audio[0],
-            changeText
-        ); // responseText -- текст ответа.
+            // вывести результат
+            console.log(
+                'вывести результат xhr.send();',
+                coubInfo.file_versions.mobile.audio[0],
+                changeText
+            ); // responseText -- текст ответа.
+        }
     }
 
     /**
