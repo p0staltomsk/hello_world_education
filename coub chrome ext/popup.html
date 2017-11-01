@@ -64,6 +64,7 @@
 
 						</span>
 
+						<!-- MAIN NOTIFICATION SPAN -->
 						<span data-ng-if="dataNotification">
 
 							<p data-ng-if="dataNotification.length > 0">Activity log from ALL channel's:</p>
@@ -89,15 +90,17 @@
 										<span data-ng-if="
 											notif.object.permalink == audio[0] &&
 											audio[1] != null
-										"><a href="{{audio[1]}}" target="_blank">{{audio[0]}} audio</a></span><!--@TODO bug duble here-->
+										"><a href="{{audio[1]}}" target="_blank">🎧</a></span> <!--@TODO bug duble here-->
 
 										<!-- mobile src -->
 										<span data-ng-if="
 											notif.object.permalink == audio[0] &&
 											audio[1] == null &&
 											audio[2] != null
-										"><a href="{{audio[2]}}" target="_blank">{{audio[0]}} audio</a></span>
+										"><a href="{{audio[2]}}" target="_blank">🎧</a></span>
 									</span>
+
+									<!-- COUB SOURCE LINK HERE LIKE: http://coub.com/sources/10499674?from_id=59735619 -->
 
 									<br>
 

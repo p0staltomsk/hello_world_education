@@ -3,9 +3,44 @@
  */
 if(window.angular === undefined) {
 
+    // 1. Создаём новый объект XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    var url = 'http://coub.com/api/v2/coubs/7zdaq';
+
+    // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+    xhr.open('GET', url, false);
+
+    // 3. Отсылаем запрос
+    xhr.send();
+
+    // 4. Если код ответа сервера не 200, то это ошибка
+    if (xhr.status != 200) {
+
+        // обработать ошибку
+        console.log( 'обработать ошибку xhr.send();', xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+
+    } else {
+
+        var coubInfo    =   JSON.parse(xhr.responseText);
+        var link        =   coubInfo.file_versions.mobile.audio[0];
+        var changeText  =   document.getElementsByClassName('coub__views-count')[0] ?
+            document.getElementsByClassName('coub__views-count')[0].childNodes[0] :
+            null;
+            if(document.getElementsByClassName('coub__views-count')[0]) {
+                changeText.innerHTML = changeText.innerHTML + ' <a href="' + link + '" target="_blank">🎧</a>';
+            }
+
+        // вывести результат
+        console.log(
+            'вывести результат xhr.send();',
+            coubInfo.file_versions.mobile.audio[0],
+            changeText
+        ); // responseText -- текст ответа.
+    }
+
     /**
      *  If Coub.com tab
-     *  @TODO, CoubPlayer DEBUS HERE
+     *  @TODO, CoubPlayer DEBUG HERE
      */
     console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
@@ -333,6 +368,9 @@ if(window.angular === undefined) {
          */
         $scope.follow = function ($channelId, $userId)
         {
+
+            $scope.dataNotification = [];
+
             /**
              *  DO FOLLOW
              */
