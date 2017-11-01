@@ -169,8 +169,10 @@ chrome.runtime.onInstalled.addListener(function() {
 
         function(request, sender, sendResponse) { // console.log(request, sender, sendResponse);
 
-            if(request.newIconPath)
-                chrome.browserAction.setIcon({path:"icon_connect.png"});
+            if(request.newIconPath) {
+                console.log('request.newIconPath = 1', this);
+            	chrome.browserAction.setIcon({path: "icon_connect.png"});
+            }
         }
     );
 });

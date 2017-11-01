@@ -43,6 +43,8 @@ if(window.angular === undefined) {
 
     script.append();
 
+    console.log(this);
+
     /**
      *  NOW WOR IN EXT APP NAMESPACE
      */

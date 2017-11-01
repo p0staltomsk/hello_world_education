@@ -9,10 +9,8 @@
 		<link href="/ext.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="angular.min.js"></script>
-
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="flowtype.js"></script>
-
         <script type="text/javascript" src="ext.js"></script>
 
 		<base target="_blank" />
@@ -110,26 +108,21 @@
 										<br>
 									</span>
 
-									<!--ICONS-->
+									<!-- ICONS -->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
-
 									<span data-ng-if="notif.kind == 'like'"><img class="likeExt" src="icon_connect.png" /> </span>
-
 									<span data-ng-if="notif.kind == 'recoub'"><img class="recoubExt" src="icon_connect.png" /> </span>
-
 									<span data-ng-if="notif.kind == 'follow'"><img class="followExt" src="icon.png" /> </span>
-
 									<span data-ng-if="notif.kind == 'new_category'"><img class="otherExt" src="icon.png" /></span>
-
-									<!--Object-->
-									<span>
-
-										<b>{{$index+1}}. <a href="
-											{{serverUrl}}
-											{{(notif.object.views_count && !notif.object.followers_count) ? '/view/' : '/'}}
-											{{notif.object.permalink}}
-										" target="_blank">{{notif.object.title}}</a></b>
-										({{(notif.object.views_count) ? notif.object.views_count : notif.object.followers_count}})
+									<!-- Object coub -->
+									<span data-ng-if="!notif.object.followers_count">
+										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
+										({{notif.object.views_count}})
+									</span>
+									<!-- or Object chanell -->
+									<span data-ng-if="notif.object.followers_count">
+										<b>{{$index+1}}. <a href="{{serverUrl}}/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
+										({{notif.object.followers_count}})
 									</span>
 
 									<br>
@@ -137,7 +130,7 @@
 									<!--  🤘🏻  🤘🏻  🤘🏻   -->
 									<span class="content gray">
 
-										<!--User's i not follow him actions-->
+										<!-- User's i not follow him actions -->
 										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
 
 											<!-- + + +  -->
@@ -191,19 +184,19 @@
 										<!--User's i follow him actions-->
 										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
 
-											<!--  -->
+											<!-- I FLOLOW HIM ALREADY -->
 											<span class="orangered backgroundPicExt" title="{{notifS.followers_count}}">
 												{{notifS.follows_by_users_channels.length}} ❤ ({{notifS.followers_count}})
 											</span>
 
-											<!--  -->
+											<!-- AVA -->
 											<span data-ng-if="
 												!notifS.avatar_versions.template.replace('%{version}', 'small')
 											">
 												<img class="avatar-svg" src="images/avatar-svg.png" />
 											</span>
 
-											<!--  -->
+											<!-- AVA -->
 											<span data-ng-if="
 												notifS.avatar_versions.template.replace('%{version}', 'small') != ''
 											">
@@ -224,6 +217,12 @@
 
 							</span>
 						</span>
+
+						<br>
+
+						<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
+
+						<br>
 
 						<p>Quick links:</p>
 
