@@ -19,7 +19,7 @@
       }
 	],
     "manifest_version"  : 2,
-    "version"           : "0.675",
+    "version"           : "0.676",
     "icons"             : {
         "128"           : "icon.png",
         "666"           : "logo.png",

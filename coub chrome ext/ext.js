@@ -6,7 +6,7 @@ if(window.angular === undefined) {
     var permalink = window.location.pathname.replace('/view/', '');
     var where = permalink.search('/');
 
-    if (where == '-1') {
+    if (where == '-1') { // @TODO ajax change coubs events
 
         // 1. Создаём новый объект XMLHttpRequest
         var xhr = new XMLHttpRequest();
@@ -346,6 +346,8 @@ if(window.angular === undefined) {
          */
         $scope.markAllReaded = function ()
         {
+            $scope.dataNotification = [];
+
             /**
              *  markAllReaded
              */
@@ -374,9 +376,6 @@ if(window.angular === undefined) {
          */
         $scope.follow = function ($channelId, $userId)
         {
-
-            $scope.dataNotification = [];
-
             /**
              *  DO FOLLOW
              */
