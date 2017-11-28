@@ -346,8 +346,6 @@ if(window.angular === undefined) {
          */
         $scope.markAllReaded = function ()
         {
-            $scope.dataNotification = [];
-
             /**
              *  markAllReaded
              */
@@ -360,9 +358,17 @@ if(window.angular === undefined) {
                 console.log(response.data);
 
                 /**
+                 * SHIT CODE?
+                 * @type {Array}
+                 */
+                $scope.dataNotification = [];
+                localStorage.lastData = [];
+                chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
+
+                /**
                  *	get storage
                  */
-                $scope.loadOptions();
+                /*$scope.loadOptions();*/
 
             }, function (data) {
                 /*
