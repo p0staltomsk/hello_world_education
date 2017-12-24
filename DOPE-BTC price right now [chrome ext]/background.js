@@ -52,11 +52,11 @@ app.controller(
 
 				if($scope.buyAlert > response.data[0].price_btc.substring(7, 10)) {
 
-					alert(
+					/*alert(
 						'buy alert! ' +
 						$scope.buyAlert + ' > ' +
 						response.data[0].price_btc.substring(7, 10)
-					);
+					);*/
 				}
 
 			} else {

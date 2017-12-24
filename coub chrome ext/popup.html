@@ -21,9 +21,9 @@
 				<td class="container" ng-cloak>
 
 					<!--HOT LINKS & MAKE COUB-->
-					<a href="http://coub.com/create" class="createCoub linkExt">Make COUB</a>
-					<a href="http://coub.com/likes" class="goCoub linkExt">Likes log</a>
-					<a href="http://coub.com/explore/hot" class="goCoub linkExt">Hot log</a>
+					<a href="http://coub.com/create" class="createCoub linkExt">✊ Make COUB</a>
+					<a href="http://coub.com/likes" class="goCoub linkExt">👍 Likes log</a>
+					<a href="http://coub.com/explore/hot" class="goCoub linkExt">🔥 Hot log</a>
 
 					<br clear="all" />
 
@@ -34,8 +34,9 @@
 					<br>
 
 					Current tab url: <!--ITS JUST FUCKING WORKING!-->
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt">THIS TAB COUB</a> 🤘🏻
+					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt hotlink">THIS TAB COUB 🤘🏻</a>
 
+					<br clear="all" />
 					<br clear="all" />
 
 					<!--NOTIFICATIONS-->
@@ -102,6 +103,11 @@
 
 									<!-- COUB SOURCE LINK HERE LIKE: http://coub.com/sources/10499674?from_id=59735619 -->
 
+									<!-- COUN NAME EDIT HERE -->
+									<span title="edit name" data-ng-if="
+											notif.entity_type == 'Coub'
+										"><a href="javascript:void(0)"> ✍️</a></span>
+
 									<br>
 
 									<span data-ng-if="
@@ -122,6 +128,7 @@
 										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
 										({{notif.object.views_count}})
 									</span>
+
 									<!-- or Object chanell -->
 									<span data-ng-if="notif.object.followers_count">
 										<b>{{$index+1}}. <a href="{{serverUrl}}/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
