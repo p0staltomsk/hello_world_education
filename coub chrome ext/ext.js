@@ -44,10 +44,6 @@ if(window.angular === undefined) {
         }
     }
 
-    /**
-     *  If Coub.com tab
-     *  @TODO, CoubPlayer DEBUG HERE
-     */
     console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
@@ -84,7 +80,7 @@ if(window.angular === undefined) {
 
     script.append();
 
-    console.log(this);
+    // console.log(this);
 
     /**
      *  NOW WOR IN EXT APP NAMESPACE

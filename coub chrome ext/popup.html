@@ -108,6 +108,10 @@
 											notif.entity_type == 'Coub'
 										"><a href="javascript:void(0)"> ✍️</a></span>
 
+									<!--
+										POST /api/v2/coubs/4551721?coub[channel_id]=25534&coub[title]=The new title&coub[tags]=coubapi,updated,test&coub[original_visibility_type]=public
+									-->
+
 									<br>
 
 									<span data-ng-if="
@@ -141,7 +145,11 @@
 									<span class="content gray">
 
 										<!-- User's i not follow him actions -->
-										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him != true">
+										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="
+											notifS.i_follow_him != true
+											 &&
+											notifS.followers_count > 20
+                                        ">
 
 											<!-- + + +  -->
 											<a href="javascript:void(0)" class="backgroundPicExt" data-ng-click="
@@ -192,7 +200,11 @@
 										</span>
 
 										<!--User's i follow him actions-->
-										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="notifS.i_follow_him == true">
+										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="
+										    notifS.i_follow_him == true
+										     &&
+											notifS.followers_count > 20
+                                        ">
 
 											<!-- I FLOLOW HIM ALREADY -->
 											<span class="orangered backgroundPicExt" title="{{notifS.followers_count}}">
