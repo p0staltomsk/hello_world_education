@@ -158,6 +158,22 @@ app.controller(
 	$interval( function(){ $scope.callAtInterval(); }, 60000);
 }]);
 
+/* req listener */
+(function() {
+    var origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+
+        console.log('request started!');
+
+        this.addEventListener('load', function() {
+            console.log('request completed!');
+
+        });
+
+        origOpen.apply(this, arguments);
+    };
+})();
+
 /**
  *	If u tab visit coub.com change icon
  */

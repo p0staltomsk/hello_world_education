@@ -12,13 +12,36 @@
 	</head>
 	<body bgcolor="white" class="DOPE" data-ng-controller="PopupCtrl" data-ng-cloak>
 
-		<div style="width: 200px;" data-ng-if="btcDATA && dopeDATA" data-ng-cloak>
-			<div data-ng-if="btcDATA">Bitcoin (BTC) {{btcDATA}}* USD</div>
-			<div data-ng-if="dopeDATA">DopeCoin (DOPE) 0.0000{{dopeDATA}} BTC</div>
+		<div style="width: 200px;" data-ng-cloak> <!--  data-ng-if="btcDATA && dopeDATA" -->
+
+			<a href="https://www.cryptopia.co.nz/Balances" target="_blank">cryptopia/Balances</a><br>
+			<a href="https://www.cryptopia.co.nz/Trades" target="_blank">cryptopia/Trade Orders</a><br>
+			<a href="https://www.cryptopia.co.nz/TradeHistory" target="_blank">cryptopia/TradeHistory</a>
+
 			<br>
-			<a href="https://www.coingecko.com/en/price_charts/bitcoin/usd/24_hours" target="_blank">bitcoin/usd/24 Hours/10 Min</a><br>
-			<a href="https://www.coingecko.com/en/price_charts/dopecoin/btc" target="_blank">dopecoin/btc/10 Min</a><br>
+			<br>
+
+			<a href="https://www.coingecko.com/en/price_charts/bitcoin/usd" target="_blank">bitcoin/usd</a><br>
+			<a href="https://www.coingecko.com/en/price_charts/dopecoin/btc" target="_blank">dopecoin/btc</a><br>
+			<a href="https://www.coingecko.com/en/price_charts/ethereum/btc" target="_blank">ethereum/btc</a><br>
+
+			<br>
+
 			<a href="https://www.cryptopia.co.nz/Exchange/?market=DOPE_BTC#" target="_blank">cryptopia/Exchange/DOPE_BTC</a>
+			<a href="https://www.cryptopia.co.nz/Exchange/?market=IN_BTC#" target="_blank">cryptopia/Exchange/IN_BTC</a>
+			<a href="https://www.cryptopia.co.nz/Exchange/?market=ETH_BTC#" target="_blank">cryptopia/Exchange/ETH_BTC</a>
+			<a href="https://www.cryptopia.co.nz/Exchange/?market=PND_BTC#" target="_blank">cryptopia/Exchange/PND_BTC</a>
+
+			<br>
+			<br>
+
+			<div data-ng-if="inDATA">IN {{inDATA}}</div>
+			<div data-ng-if="ethDATA">ETH <b>{{ethDATA}}</b></div>
+			<div data-ng-if="dogeDATA">DOGE <b>{{dogeDATA}}</b></div>
+
+			<div data-ng-if="dopeDATA">DopeCoin (DOPE) 0.0000{{dopeDATA}} BTC</div>
+
+			<div data-ng-if="btcDATA">Bitcoin (BTC) <b>{{btcDATA}}*</b> USD</div>
 
 		</div>
 

@@ -6,7 +6,7 @@ if(window.angular === undefined) {
     var permalink = window.location.pathname.replace('/view/', '');
     var where = permalink.search('/');
 
-    if (where == '-1') { // @TODO ajax change coubs events
+    /*if (where == '-1') { // @TODO ajax change coubs events
 
         // 1. Создаём новый объект XMLHttpRequest
         var xhr = new XMLHttpRequest();
@@ -42,49 +42,12 @@ if(window.angular === undefined) {
                 changeText
             ); // responseText -- текст ответа.
         }
-    }
+    }*/
 
     console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
+
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
-    /**
-     *  @TODO settings not work now, DO IT NEXT TIME
-     */
-    if(!localStorage.soundLow) {
-        localStorage.player_sound_level = "0.15";
-    }
-
-    /**
-     *  @desc Modify coub.com CSS, just fun modding, sorry ;D
-     * @type {{type: string, style: Element, content: string, append: script.append}}
-     */
-    var script = {
-
-        type: 'text/css',
-        style: document.createElement('style'),
-        content: "" +
-        ".viewer__hand, #hs-beacon {display:none !important;} " +
-        ".coub__description{background-color:#f8f8f8 !important;} " +
-        ".coub__views-count span{color:orangered !important;}" +
-        ".coub__user-stamp-small__wrapper span{color:orangered !important;}" +
-        ".-color--emperor {color:orangered !important;}" +
-        /*".intercomButton.active {opacity: 0.3 !important;}" +
-        ".header-channel__notify-badge.box--vertical {opacity: 0.3 !important;}" +*/
-        "",
-        append: function() {
-            this.style.type = this.type;
-            this.style.appendChild(document.createTextNode(this.content));
-            document.head.appendChild(this.style);
-        }
-    };
-
-    script.append();
-
-    // console.log(this);
-
-    /**
-     *  NOW WOR IN EXT APP NAMESPACE
-     */
 } else {
 
     /**
@@ -116,7 +79,6 @@ if(window.angular === undefined) {
     app.controller("headPopupCtrl", ['$scope', '$http', function ($scope, $http)
     {
         console.log("headPopupCtrl init");
-
     }]);
 
     /**
