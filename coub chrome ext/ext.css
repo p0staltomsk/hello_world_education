@@ -49,7 +49,7 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 
 /**/
 .header.container table td.logo,.column tr td{padding:15px}
-.goCoub, .createCoub{float: right; margin-right: 10px;}
+.goCoub, .createCoub{float: none; margin: 0 auto; margin-right: 5px;}
 .orangered{color: orangered;}
 .gray{background: #ececec; padding-top: 10px;}
 .backgroundPicExt{color: orangered; float: right; margin-top: 20px; clear: both;}
@@ -65,8 +65,6 @@ table.head-wrap,table.body-wrap,.content table,.column table{width:100%}
 .youNotFollow {
     font-size: 16px;
 }
-/*.title {position: relative;top: -15px;}
-.userPosition {position: relative;top: -15px;}*/
 
 /*  */
 .likeExt {width: 5px; height: 10px;}
