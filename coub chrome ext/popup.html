@@ -73,7 +73,7 @@
 							<!--<pre data-ng-bind="dataNotification | json"></pre>-->
 							<!--<pre data-ng-bind="followStatus | json"></pre>-->
 
-							<span data-ng-repeat="notif in dataNotification">
+							<span data-ng-repeat="notif in dataNotification | orderBy:'-kind'">
 
 								<!--<pre data-ng-bind="notif.kind | json"></pre>-->
 
@@ -104,12 +104,11 @@
 									<!-- COUB SOURCE LINK HERE LIKE: http://coub.com/sources/10499674?from_id=59735619 -->
 
 									<!-- COUN NAME EDIT HERE -->
-									<span title="edit name" data-ng-if="
-											notif.entity_type == 'Coub'
-										"><a href="javascript:void(0)"> ✍️</a></span>
+									<!--<span title="edit name" data-ng-if=" notif.entity_type == 'Coub'"><a href="javascript:void(0)"> ✍️</a></span>-->
 
 									<!--
-										POST /api/v2/coubs/4551721?coub[channel_id]=25534&coub[title]=The new title&coub[tags]=coubapi,updated,test&coub[original_visibility_type]=public
+										POST /api/v2/coubs/4551721?coub[channel_id]=25534&coub[title]=
+										The new title&coub[tags]=coubapi,updated,test&coub[original_visibility_type]=public
 									-->
 
 									<br>
@@ -121,12 +120,16 @@
 										<br>
 									</span>
 
+									<br>
+
 									<!-- ICONS -->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
+
 									<span data-ng-if="notif.kind == 'like'"><img class="likeExt" src="icon_connect.png" /> </span>
 									<span data-ng-if="notif.kind == 'recoub'"><img class="recoubExt" src="icon_connect.png" /> </span>
 									<span data-ng-if="notif.kind == 'follow'"><img class="followExt" src="icon.png" /> </span>
 									<span data-ng-if="notif.kind == 'new_category'"><img class="otherExt" src="icon.png" /></span>
+
 									<!-- Object coub -->
 									<span data-ng-if="!notif.object.followers_count">
 										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>

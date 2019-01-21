@@ -167,7 +167,7 @@ if(window.angular === undefined) {
 
                             $scope.arrPermalinkData.push(response.data);
 
-                            console.log(response.data);
+                            /*console.log(response.data);*/
 
                             var audio;
                             audio = [
@@ -204,7 +204,7 @@ if(window.angular === undefined) {
                 // listen for the event in the relevant $scope
                 $scope.$on('myCustomEvent', function (event, data) {
 
-                    console.log("HUI",data);
+                    /*console.log("HUI",data);*/
 
                     /*localStorage.setItem("audioByCode", JSON.stringify(objData));
                     console.log($scope.arrPermalinkData, objData, $scope.bgLoading);*/

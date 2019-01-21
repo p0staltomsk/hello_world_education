@@ -10,42 +10,36 @@
 		
 		<md-content layout-padding>
 
-            next donate do
             <!--@TODO NOT WORKING-->
-            <label><input type="checkbox" id="showOnlyImportant" data-ng-checked="showOnlyImportant=='true'" />showOnlyImportant</label>
+            <label><input type="checkbox" id="showOnlyImportant" data-ng-checked="showOnlyImportant=='true'" disabled />showOnlyImportant</label>
 
             <br />
             <br />
 
-            next donate do
             <!--@TODO NOT WORKING-->
-            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" />Sound low down to 15% on coub.com</label>
+            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" disabled />Sound low down to 15% on coub.com</label>
 
-            next donate do
             <!--@TODO NOT WORKING-->
-            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" />Not show follower < 20 followers</label>
+            <label><input type="checkbox" id="soundLow" data-ng-checked="soundLow=='true'" disabled />Not show follower < 20 followers</label>
 
             <br />
             <br />
 
-            next donate do
             <!--@TODO NOT WORKING-->
-            <label><input type="checkbox" id="hideHand" data-ng-checked="hideHand=='true'" />Hide "hand" in mosaic list style on coub.com</label>
+            <label><input type="checkbox" id="hideHand" data-ng-checked="hideHand=='true'" disabled />Hide "hand" in mosaic list style on coub.com</label>
 
             <br />
             <br />
 
-            next donate do
             <!--@TODO NOT WORKING-->
-            <label><input type="checkbox" id="hideChatIcon" data-ng-checked="hideChatIcon=='true'" />Hide chat icon on coub.com</label>
+            <label><input type="checkbox" id="hideChatIcon" data-ng-checked="hideChatIcon=='true'" disabled />Hide chat icon on coub.com</label>
 
             <br />
             <br />
 
-            next donate do
             <!--@TODO NOT WORKING-->
             Best Color you like:
-            <select id="color">
+            <select id="color" disabled>
                 <option value="FFFFFF">White</option>
                 <option value="005EA7">Blue</option>
                 <option value="FFDE40">Orange</option>
@@ -54,10 +48,9 @@
 
             <br />
 
-            next donate do
             <!--@TODO NOT WORKING-->
             Backgroung every minute load events:
-            <select id="color">
+            <select id="color" disabled>
                 <option value="5">50</option>
                 <option value="100">100</option>
                 <option value="200">200</option>
@@ -69,9 +62,9 @@
             <br />
             <br />
 
-			<button id="save" data-ng-click="saveOptions()">Options save</button>
+			<button id="save" data-ng-click="saveOptions()" disabled>Options save</button>
 
-            <pre data-ng-bind="users | json"></pre>
+            <!--<pre data-ng-bind="users | json"></pre>-->
 
 		</md-content>
 	</body>
