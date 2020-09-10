@@ -16,25 +16,24 @@
 		<base target="_blank" />
 	</head>
 	<body bgcolor="white" class="coubExt" data-ng-controller="PopupCtrl" ng-cloak>
-		<table class="body-wrap" ng-cloak>
+
+        <table class="body-wrap" ng-cloak>
 			<tr> 
 				<td class="container" ng-cloak>
 
 					<!--HOT LINKS & MAKE COUB-->
 					<a href="http://coub.com/explore/hot" class="goCoub linkExt">🔥 Hot log</a>
 					<a href="http://coub.com/likes" class="goCoub linkExt">👍 Likes log</a>
-					<a href="http://coub.com/create" class="createCoub linkExt">✊ Make COUB</a>
+                    <a href="https://coub.com/bookmarks" class="createCoub linkExt">📖 Bookmarks</a>
+
+                    <a href="http://coub.com/create" class="createCoub linkExt">✊ Make COUB</a>
+                    <a href="https://coub.com/stories/new" class="createCoub linkExt">💎 Make new STORY</a>
 
 					<br clear="all" />
 
 					<br>
 
-					Coub.com API based app 🚬
-
-					<br>
-
-					Current tab url: <!--ITS JUST FUCKING WORKING!-->
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt hotlink">THIS TAB COUB 🤘🏻</a>
+					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt hotlink">DO COUB FROM THIS TAB 🤘🏻</a>
 
 					<br clear="all" />
 					<br clear="all" />
@@ -48,34 +47,51 @@
 
 							<img data-ng-src="{{dataChannelBachground}}" class="backgroundPicExt" />
 
-							<!--<pre data-ng-bind="audioByCode | json"></pre>-->
-
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank"><img data-ng-src="{{dataUserIcon}}" /></a>
 
 							<a href="{{serverUrl}}/{{dataUser.current_channel.permalink}}" target="_blank">{{dataUser.current_channel.title}}</a>
-							({{dataUser.current_channel.followers_count}}) (<span class="orangered">{{dataUser.current_channel.following_count}}</span>)
+
+                            <br>
+                            <br>
+                            <br>
+
+                            <span class="content gray">
+
+                                <!--<pre data-ng-bind="dataUser.current_channel | json"></pre>-->
+
+                                <span class="orangered">{{dataUser.current_channel.followers_count}}</span> - Followers
+
+                                <br>
+
+                                <span class="orangered">{{dataUser.current_channel.following_count}}</span> - You follow
+
+                                <br>
+
+                                <span class="orangered">{{dataChannelViewsCount}}</span> - This channel views 👁
+
+                            </span>
 
 							<br>
 
-							{{dataChannelViewsCount}} views
+                            <span data-ng-if="dataNotification.length > 0">
+                                <br>
+							    <a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
+                            </span>
 
-							<br>
-
-							<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
+                            <!--<pre data-ng-bind="dataNotification | json"></pre>-->
 
 						</span>
 
 						<!-- MAIN NOTIFICATION SPAN -->
 						<span data-ng-if="dataNotification">
 
-							<p data-ng-if="dataNotification.length > 0">Activity log from ALL channel's:</p>
+							<p data-ng-if="dataNotification.length > 0">Activity log from ALL U channel's:</p>
 
-							<!--<pre data-ng-bind="dataNotification | json"></pre>-->
 							<!--<pre data-ng-bind="followStatus | json"></pre>-->
 
 							<span data-ng-repeat="notif in dataNotification | orderBy:'-kind'">
 
-								<!--<pre data-ng-bind="notif.kind | json"></pre>-->
+								<!--<pre data-ng-bind="notif | json"></pre>-->
 
 								<p>
 									<!--KIND entity_type-->
@@ -89,16 +105,16 @@
 
 										<!-- web src -->
 										<span data-ng-if="
-											notif.object.permalink == audio[0] &&
-											audio[1] != null
-										"><a href="{{audio[1]}}" target="_blank">🎧</a></span> <!--@TODO bug duble here-->
+											notif.object.permalink == audio[0] && audio[1] != null
+										"><a href="{{audio[1]}}" target="_blank">Download coub music 🎧</a></span>
+
+                                        <!--@TODO bug duble here-->
 
 										<!-- mobile src -->
 										<span data-ng-if="
-											notif.object.permalink == audio[0] &&
-											audio[1] == null &&
-											audio[2] != null
-										"><a href="{{audio[2]}}" target="_blank">🎧</a></span>
+											notif.object.permalink == audio[0] && audio[1] == null && audio[2] != null
+										"><a href="{{audio[2]}}" target="_blank">Download coub music 🎧</a></span>
+
 									</span>
 
 									<!-- COUB SOURCE LINK HERE LIKE: http://coub.com/sources/10499674?from_id=59735619 -->
@@ -110,6 +126,12 @@
 										POST /api/v2/coubs/4551721?coub[channel_id]=25534&coub[title]=
 										The new title&coub[tags]=coubapi,updated,test&coub[original_visibility_type]=public
 									-->
+
+                                    <br>
+
+                                    <!--<a href="javascript: void(0)" class="linkExt" data-ng-click="loga(notif.iframeLink);">View coub 🤟</a>
+
+                                    <iframe id="{{notif.object.permalink}}" src="{{notif.iframeLink}}" width="220" height="410"></iframe>-->
 
 									<br>
 
@@ -133,7 +155,7 @@
 									<!-- Object coub -->
 									<span data-ng-if="!notif.object.followers_count">
 										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
-										({{notif.object.views_count}})
+										({{notif.object.views_count}} 👁)
 									</span>
 
 									<!-- or Object chanell -->
@@ -237,11 +259,18 @@
 								</p>
 
 							</span>
+
 						</span>
 
 						<br>
 
-						<a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
+                        <span data-ng-if="dataNotification.length > 0">
+						    <a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
+                        </span>
+
+                        <span data-ng-if="dataNotification.length == 0">
+						    Have no new notifications yet 😏.
+                        </span>
 
 						<br>
 
@@ -271,8 +300,8 @@
 
 						<br>
 
-						<input placeholder="#tag/name" data-ng-model="search_text" />
-						<button data-ng-click="searchFunc()">search by click</button>
+						<input placeholder="#tag/name + press enter" data-ng-model="search_text" ng-keypress="searchByEnter($event)" />
+						<button data-ng-click="searchFunc()">or search by click button</button>
 
 						<span data-ng-if="model.data.coubs">
 							<p>Search result's:</p>
@@ -283,6 +312,10 @@
 						</span>
 
 					</div>
+
+					<br>
+
+                    Coub.com API based app 🚬 by <a href="https://coub.com/dj.barabek">CrazyRadio Team</a>
 
 				</td>
 			</tr>

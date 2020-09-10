@@ -18,7 +18,7 @@ app.controller(
 	/**
 	 * 	JUST LOG HERE
 	 */
-    console.log('BackgroundCtrl init');
+    // console.log('BackgroundCtrl init');
 
     $scope.page = 1;
     $scope.per_page = 50;
@@ -134,16 +134,16 @@ app.controller(
         /**
 		 * 	check storage
          */
-		if(!localStorage.lastData){
+		/*if(!localStorage.lastData){
             console.log('no last data');
 		} else {
-            console.log('has last data'/*, JSON.parse(localStorage.lastData)*/);
-		}
+            console.log('has last data', JSON.parse(localStorage.lastData));
+		}*/
 
         /**
 		 *  LOG HERE
          */
-        console.log(localStorage);
+        // console.log(localStorage);
 	}
 
 	/**
@@ -163,7 +163,7 @@ app.controller(
  */
 chrome.runtime.onInstalled.addListener(function() {
 
-    console.log('chrome.runtime.onInstalled.addListener background.js init');
+    // console.log('chrome.runtime.onInstalled.addListener background.js init');
 
     chrome.runtime.onMessage.addListener(
 
@@ -171,9 +171,8 @@ chrome.runtime.onInstalled.addListener(function() {
 
             if(request.newIconPath) {
 
-                console.log('request.newIconPath = 1', this);
+                // console.log('request.newIconPath = 1', this);
             	chrome.browserAction.setIcon({path: "icon_connect.png"});
-
             }
         }
     );

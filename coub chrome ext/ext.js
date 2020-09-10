@@ -7,7 +7,7 @@ if(window.angular === undefined) {
     var permalink = window.location.pathname.replace('/view/', '');
     var where = permalink.search('/');
 
-    console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
+    // console.log('Coub Ext.js init on coub.com! 👊 coub.localStorage:', localStorage);
 
     chrome.runtime.sendMessage({ "newIconPath" : 1 });
 
@@ -16,7 +16,7 @@ if(window.angular === undefined) {
     /**
      *  if on ext popup window
      */
-    console.log('Coub Ext.js init inside ext! 👊 ext.localStorage:', localStorage);
+    // console.log('Coub Ext.js init inside ext! 👊 ext.localStorage:', localStorage);
     chrome.runtime.sendMessage({ "newIconPath" : 0 });
 
     /**
@@ -41,7 +41,7 @@ if(window.angular === undefined) {
      */
     app.controller("headPopupCtrl", ['$scope', '$http', function ($scope, $http)
     {
-        console.log("headPopupCtrl init");
+        // console.log("headPopupCtrl init");
     }]);
 
     /**
@@ -49,7 +49,7 @@ if(window.angular === undefined) {
      */
     app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http)
     {
-        console.log('PopupCtrl init');
+        // console.log('PopupCtrl init');
 
         $scope.page                     = 1;
         $scope.per_page                 = 100;
@@ -88,7 +88,7 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
-                console.log(response.data.channels, response.data.current_channel.id);
+                // console.log(response.data.channels, response.data.current_channel.id);
 
                 /**
                  * 	Only current channet background need
@@ -153,7 +153,11 @@ if(window.angular === undefined) {
 
                     if(field.important === true) { /* && localStorage.showOnlyImportant === true*/
 
+                        field.iframeLink = "https://coub.com/embed/" + field.object.permalink + "?muted=false&autostart=false&originalSize=false&startWithHD=false";
+
                         $scope.dataNotification.push(field);
+
+                        console.log(field);
 
                         /**
                          *	get mp3 path's
@@ -276,7 +280,7 @@ if(window.angular === undefined) {
                 headers: ''
             }).then(function (response) {
 
-                console.log(response.data);
+                // console.log(response.data);
 
                 /**
                  * SHIT CODE?
@@ -296,6 +300,11 @@ if(window.angular === undefined) {
                 * Trow here
                 * */
             });
+        }
+
+        $scope.loga = function ($arg)
+        {
+            console.log($arg);
         }
 
         /**
@@ -328,7 +337,7 @@ if(window.angular === undefined) {
          */
         $scope.unfollow = function ($channelId, $userId)
         {
-            console.log('UNFOLLOW DEBUG',$channelId, $userId);
+            // console.log('UNFOLLOW DEBUG', $channelId, $userId);
         }
 
         /**
@@ -355,13 +364,19 @@ if(window.angular === undefined) {
             }).then(function (response) {
 
                 $scope.model = response;
-                console.log(response);
+                // console.log(response);
 
             }, function (data) {
                 /*
                 * Trow here
                 * */
             });
+        }
+
+        $scope.searchByEnter = function(keyEvent) {
+            if (keyEvent.which === 13) {
+                $scope.searchFunc();
+            }
         }
 
         /**
@@ -380,8 +395,11 @@ if(window.angular === undefined) {
                     active: true,                   // Select active tabs
                     lastFocusedWindow: true         // In the current window
                 }, function(tabs) {
+
                     resolve(tabs[0]);
-                    $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
+
+                    if(tabs[0] != undefined)
+                        $scope.serverCTU = tabs[0].url; // CURRENT TAB URL
                 });
             });
         }
