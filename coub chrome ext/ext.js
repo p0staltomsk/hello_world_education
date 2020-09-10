@@ -157,7 +157,7 @@ if(window.angular === undefined) {
 
                         $scope.dataNotification.push(field);
 
-                        console.log(field);
+                        // console.log(field);
 
                         /**
                          *	get mp3 path's
@@ -304,7 +304,7 @@ if(window.angular === undefined) {
 
         $scope.loga = function ($arg)
         {
-            console.log($arg);
+            // console.log($arg);
         }
 
         /**
