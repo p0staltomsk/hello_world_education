@@ -52,7 +52,7 @@ if(window.angular === undefined) {
         console.log('PopupCtrl init');
 
         $scope.page                     = 1;
-        $scope.per_page                 = 50;
+        $scope.per_page                 = 100;
         $scope.method                   = 'GET';
         $scope.methodPost               = 'POST';
         $scope.serverUrl                = 'http://coub.com';

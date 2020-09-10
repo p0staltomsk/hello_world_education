@@ -148,11 +148,7 @@
 									<span class="content gray">
 
 										<!-- User's i not follow him actions -->
-										<span class="users" data-ng-repeat="notifS in notif.senders track by $index" data-ng-if="
-											notifS.i_follow_him != true
-											 &&
-											notifS.followers_count > 20
-                                        ">
+										<span class="users" data-ng-repeat="notifS in notif.senders | orderBy:'-followers_count' track by $index" data-ng-if="notifS.i_follow_him != true && notifS.followers_count > 20">
 
 											<!-- + + +  -->
 											<a href="javascript:void(0)" class="backgroundPicExt" data-ng-click="

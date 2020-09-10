@@ -41,7 +41,7 @@ app.controller(
         $scope.important = 0;
 
         /**
-		 * 	DO ajax requesr to coub.com
+		 * 	DO ajax request to coub.com
          */
 		$http({
 			method: $scope.method,
