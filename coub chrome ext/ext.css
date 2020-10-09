@@ -224,7 +224,7 @@ table.head-wrap, table.body-wrap, .content table, .column table {
 .backgroundPicExt {
     color: orangered;
     float: right;
-    margin-top: 0px;
+    margin-top: 20px;
     clear: both;
     max-width: 100px;
     height: auto;

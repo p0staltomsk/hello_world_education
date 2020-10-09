@@ -20,16 +20,6 @@ if(window.angular === undefined) {
     chrome.runtime.sendMessage({ "newIconPath" : 0 });
 
     /**
-     *  JQUERY HACK FOR FONT SIZES
-     */
-    $(document).ready(function(){
-        $('body').flowtype({
-            minimum : 360,
-            maximum : 480
-        });
-    });
-
-    /**
      *  ANGULAR
      */
     var app = angular.module('_popup', []);
@@ -64,7 +54,6 @@ if(window.angular === undefined) {
         $scope.dataType                 = 'json';
         $scope.dataNotification         = [];
         $scope.followStatus             = [];
-        $scope.audioByCode              = [];
         $scope.arrPermalinkData         = [];
         $scope.bgLoading                = true;
         $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
@@ -72,6 +61,7 @@ if(window.angular === undefined) {
         $scope.logData                  = (localStorage.logData)                ? JSON.parse(localStorage.logData)          : '';
         $scope.dataChannelBachground    = (localStorage.dataChannelBachground)  ? localStorage.dataChannelBachground        : '';
         $scope.dataChannelViewsCount    = (localStorage.dataChannelViewsCount)  ? localStorage.dataChannelViewsCount        : '';
+        $scope.allChannelsViewCnt       = (localStorage.allChannelsViewCnt)     ? localStorage.allChannelsViewCnt           : 0;
 
         /**
          * Load from storage
@@ -88,12 +78,14 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
-                // console.log(response.data.channels, response.data.current_channel.id);
+                $scope.allChannelsViewCnt = 0;
 
                 /**
                  * 	Only current channet background need
                  */
                 angular.forEach(response.data.channels, function (field, key) {
+
+                    $scope.allChannelsViewCnt += field.views_count;
 
                     if(field.id === response.data.current_channel.id) {
 
@@ -110,6 +102,8 @@ if(window.angular === undefined) {
                         }
                     }
                 });
+
+                localStorage.allChannelsViewCnt = $scope.allChannelsViewCnt;
 
                 /**
                  *  save user pic and cache
@@ -156,62 +150,17 @@ if(window.angular === undefined) {
                         field.iframeLink = "https://coub.com/embed/" + field.object.permalink + "?muted=false&autostart=false&originalSize=false&startWithHD=false";
 
                         $scope.dataNotification.push(field);
-
-                        // console.log(field);
-
-                        /**
-                         *	get mp3 path's
-                         */
-                        $http({
-                            method:     $scope.method,
-                            url:        $scope.urlItem + field.object.permalink,
-                            dataType:   $scope.dataType
-                        }).
-                        then(function(response) {
-
-                            $scope.arrPermalinkData.push(response.data);
-
-                            /*console.log(response.data);*/
-
-                            var audio;
-                            audio = [
-                                field.object.permalink,
-                                response.data.audio_file_url,
-                                response.data.file_versions.mobile.audio[1]
-                            ];
-
-                            objData[cnt] = audio;
-                            $scope.audioByCode.push(audio);
-
-                            cnt++;
-
-                        }, function(data) {
-                            /*
-                            * Trow here
-                            * */
-                        });
                     }
 
-                    /**
-                     *
-                     */
                     if((key - 1) == response.data.notifications.length) {
 
                         $scope.bgLoading = true;
-
-                        // firing an event downwards
-                        /*$scope.$broadcast('myCustomEvent', $scope.bgLoading);
-                        $scope.$emit('myCustomEvent', $scope.bgLoading);*/
                     }
                 });
 
                 // listen for the event in the relevant $scope
                 $scope.$on('myCustomEvent', function (event, data) {
 
-                    /*console.log("HUI",data);*/
-
-                    /*localStorage.setItem("audioByCode", JSON.stringify(objData));
-                    console.log($scope.arrPermalinkData, objData, $scope.bgLoading);*/
                 });
 
                 /*console.log($scope.bgLoading);*/
@@ -290,21 +239,11 @@ if(window.angular === undefined) {
                 localStorage.lastData = [];
                 chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
 
-                /**
-                 *	get storage
-                 */
-                /*$scope.loadOptions();*/
-
             }, function (data) {
                 /*
                 * Trow here
                 * */
             });
-        }
-
-        $scope.loga = function ($arg)
-        {
-            // console.log($arg);
         }
 
         /**
@@ -329,24 +268,6 @@ if(window.angular === undefined) {
 
                 $scope.followStatus = [$userId, "false"];
             });
-        }
-
-        /**
-         *  unfollow to user
-         *  @TODO go
-         */
-        $scope.unfollow = function ($channelId, $userId)
-        {
-            // console.log('UNFOLLOW DEBUG', $channelId, $userId);
-        }
-
-        /**
-         *  follow to user
-         *  @TODO what is it?
-         */
-        $scope.tryMakeCoub = function ($serverCTU)
-        {
-            console.log($serverCTU);
         }
 
         /**

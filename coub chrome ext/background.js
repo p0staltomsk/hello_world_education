@@ -21,7 +21,7 @@ app.controller(
     // console.log('BackgroundCtrl init');
 
     $scope.page = 1;
-    $scope.per_page = 50;
+    $scope.per_page = 100;
     $scope.important = 0;
 	$scope.method = 'GET';
 	$scope.response = null;
@@ -91,16 +91,6 @@ app.controller(
             * Trow here
             * */
 		});
-
-        /*chrome.runtime.onMessage.addListener(
-
-        	function(request, sender, sendResponse) {
-
-            	console.log(request, sender, sendResponse);
-                if(!request.newIconPath)
-                    chrome.browserAction.setIcon({path:"icon.png"});
-            }
-        );*/
 	}
 
 	/**
@@ -130,20 +120,6 @@ app.controller(
             * Trow here
             * */
         });
-
-        /**
-		 * 	check storage
-         */
-		/*if(!localStorage.lastData){
-            console.log('no last data');
-		} else {
-            console.log('has last data', JSON.parse(localStorage.lastData));
-		}*/
-
-        /**
-		 *  LOG HERE
-         */
-        // console.log(localStorage);
 	}
 
 	/**
@@ -156,6 +132,7 @@ app.controller(
 	 */
 	$scope.callAtInterval();
 	$interval( function(){ $scope.callAtInterval(); }, 60000);
+
 }]);
 
 /**
@@ -171,7 +148,6 @@ chrome.runtime.onInstalled.addListener(function() {
 
             if(request.newIconPath) {
 
-                // console.log('request.newIconPath = 1', this);
             	chrome.browserAction.setIcon({path: "icon_connect.png"});
             }
         }

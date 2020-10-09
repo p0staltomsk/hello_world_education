@@ -4,7 +4,7 @@ app.run(function() {});
 
 app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
-    console.log('OptionsCtrl init');
+    // console.log('OptionsCtrl init');
 
     /**
      *  @TODO USE IT
@@ -29,7 +29,7 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
     $scope.loadOptions = function(arg) {
 
-        console.log(localStorage);
+        // console.log(localStorage);
 
         /*
         * Get coub account and channels info
@@ -52,8 +52,6 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
             angular.forEach(response.data.channels, function (field, key) {
 
                 if(field.i_follow_him === true && field.followers_count < 100 ) {
-
-
 
                     var user;
                     user = [
@@ -83,7 +81,7 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
     $scope.loadOptions($scope.followersPage);
 
-    console.log($scope.users);
+    // console.log($scope.users);
 
     /**
      *

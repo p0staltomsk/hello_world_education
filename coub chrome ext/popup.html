@@ -9,8 +9,6 @@
 		<link href="/ext.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="angular.min.js"></script>
-        <script type="text/javascript" src="jquery.min.js"></script>
-        <script type="text/javascript" src="flowtype.js"></script>
         <script type="text/javascript" src="ext.js"></script>
 
 		<base target="_blank" />
@@ -33,7 +31,7 @@
 
 					<br>
 
-					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" data-ng-click="tryMakeCoub(serverCTU)" class="linkExt hotlink">DO COUB FROM THIS TAB 🤘🏻</a>
+					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" class="linkExt hotlink">DO COUB FROM THIS TAB 🤘🏻</a>
 
 					<br clear="all" />
 					<br clear="all" />
@@ -69,6 +67,10 @@
 
                                 <span class="orangered">{{dataChannelViewsCount}}</span> - This channel views 👁
 
+                                <br>
+
+                                <span class="orangered">{{allChannelsViewCnt}}</span> - All you channels views 👁
+
                             </span>
 
 							<br>
@@ -100,41 +102,6 @@
 
 									<br>
 
-									<!-- audio links 🤙🤙🤙 -->
-									<span data-ng-repeat="audio in audioByCode">
-
-										<!-- web src -->
-										<span data-ng-if="
-											notif.object.permalink == audio[0] && audio[1] != null
-										"><a href="{{audio[1]}}" target="_blank">Download coub music 🎧</a></span>
-
-                                        <!--@TODO bug duble here-->
-
-										<!-- mobile src -->
-										<span data-ng-if="
-											notif.object.permalink == audio[0] && audio[1] == null && audio[2] != null
-										"><a href="{{audio[2]}}" target="_blank">Download coub music 🎧</a></span>
-
-									</span>
-
-									<!-- COUB SOURCE LINK HERE LIKE: http://coub.com/sources/10499674?from_id=59735619 -->
-
-									<!-- COUN NAME EDIT HERE -->
-									<!--<span title="edit name" data-ng-if=" notif.entity_type == 'Coub'"><a href="javascript:void(0)"> ✍️</a></span>-->
-
-									<!--
-										POST /api/v2/coubs/4551721?coub[channel_id]=25534&coub[title]=
-										The new title&coub[tags]=coubapi,updated,test&coub[original_visibility_type]=public
-									-->
-
-                                    <br>
-
-                                    <!--<a href="javascript: void(0)" class="linkExt" data-ng-click="loga(notif.iframeLink);">View coub 🤟</a>
-
-                                    <iframe id="{{notif.object.permalink}}" src="{{notif.iframeLink}}" width="220" height="410"></iframe>-->
-
-									<br>
-
 									<span data-ng-if="
 										notif.object.image_versions.template.replace('%{version}', 'micro_2x') != ''
 									">
@@ -142,7 +109,7 @@
 										<br>
 									</span>
 
-									<br>
+                                    <br>
 
 									<!-- ICONS -->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
@@ -170,7 +137,9 @@
 									<span class="content gray">
 
 										<!-- User's i not follow him actions -->
-										<span class="users" data-ng-repeat="notifS in notif.senders | orderBy:'-followers_count' track by $index" data-ng-if="notifS.i_follow_him != true && notifS.followers_count > 20">
+										<span class="users"
+                                              data-ng-repeat="notifS in notif.senders | orderBy:'-followers_count' track by $index"
+                                              data-ng-if="notifS.i_follow_him != true && notifS.followers_count > 20">
 
 											<!-- + + +  -->
 											<a href="javascript:void(0)" class="backgroundPicExt" data-ng-click="

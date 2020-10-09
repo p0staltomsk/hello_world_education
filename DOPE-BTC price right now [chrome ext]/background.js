@@ -40,7 +40,7 @@ app.controller(
 		}).
 		then(function(response) {
 
-			console.log(response.data[0].last_updated, response.data[0].percent_change_1h);
+			// console.log(response.data[0].last_updated, response.data[0].percent_change_1h);
 
 			if($scope.nowDOPE == 1) {
 
