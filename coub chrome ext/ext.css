@@ -274,6 +274,28 @@ body > table > tbody > tr > td > div.content.content_lightgray > div:nth-child(1
 
 }
 
+body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.ng-binding.ng-scope {
+    position: relative;
+    top: 2px;
+}
+
+.recoubExt, .likeExt, body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.orangered.ng-binding {
+    position: relative;
+    top: 15px;
+    left: 0px;
+    z-index: 111;
+    background: orangered;
+    color: white;
+    border-radius: 15px;
+    margin-right: 0px;
+    padding: 2px;
+}
+
+.box {
+    padding: 0;
+    margin: 0;
+}
+
 .likeExt {
     width: 16px;
     height: 16px;

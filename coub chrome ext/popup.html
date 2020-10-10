@@ -82,13 +82,9 @@
 						<!-- MAIN NOTIFICATION SPAN -->
 						<div data-ng-if="dataNotification">
 
-							<p data-ng-if="dataNotification.length > 0">ALL Channel's Activity Log :</p>
-
 							<span data-ng-repeat="notif in dataNotification | orderBy:'-kind'">
 
-								<p>
-									<!--KIND entity_type-->
-									<span class="orangered">{{notif.entity_type}} {{notif.kind}}</span>
+								<p class="box">
 
                                     <!-- ICONS -->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
@@ -98,6 +94,10 @@
 									<span data-ng-if="notif.kind == 'follow'"><img class="followExt" src="icon.png" /> </span>
 									<span data-ng-if="notif.kind == 'new_category'"><img class="otherExt" src="icon.png" /></span>
 
+									<!--KIND entity_type-->
+									<span class="orangered">{{notif.entity_type}} {{notif.kind}}</span>
+
+									<!---->
 									<span data-ng-if="
 										notif.object.image_versions.template.replace('%{version}', 'micro_2x') != ''
 									">
