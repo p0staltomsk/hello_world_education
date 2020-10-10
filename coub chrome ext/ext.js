@@ -62,6 +62,7 @@ if(window.angular === undefined) {
         $scope.dataChannelBachground    = (localStorage.dataChannelBachground)  ? localStorage.dataChannelBachground        : '';
         $scope.dataChannelViewsCount    = (localStorage.dataChannelViewsCount)  ? localStorage.dataChannelViewsCount        : '';
         $scope.allChannelsViewCnt       = (localStorage.allChannelsViewCnt)     ? localStorage.allChannelsViewCnt           : 0;
+        $scope.dataChannelCountCnt      = (localStorage.dataChannelCountCnt)    ? localStorage.dataChannelCountCnt          : 0;
 
         /**
          * Load from storage
@@ -89,8 +90,11 @@ if(window.angular === undefined) {
 
                     if(field.id === response.data.current_channel.id) {
 
-                        $scope.dataChannelViewsCount = field.views_count;
-                        localStorage.dataChannelViewsCount = $scope.dataChannelViewsCount;
+                        $scope.dataChannelCountCnt      = field.simple_coubs_count;
+                        $scope.dataChannelViewsCount    = field.views_count;
+
+                        localStorage.dataChannelCountCnt    = $scope.dataChannelCountCnt;
+                        localStorage.dataChannelViewsCount  = $scope.dataChannelViewsCount;
 
                         if(field.background_coub != null) {
 
@@ -110,6 +114,7 @@ if(window.angular === undefined) {
                  */
                 localStorage.dataUser = JSON.stringify(response.data);
                 $scope.dataUser = response.data;
+
                 localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
                 $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
 
@@ -129,8 +134,6 @@ if(window.angular === undefined) {
             }).
             then(function(response) {
 
-                /*console.log(localStorage);*/
-
                 $scope.dataNotification = [];
                 var objData = {};
                 var cnt = 0;
@@ -145,7 +148,7 @@ if(window.angular === undefined) {
                  */
                 angular.forEach(response.data.notifications, function (field, key) {
 
-                    if(field.important === true) { /* && localStorage.showOnlyImportant === true*/
+                    if(field.important === true) {
 
                         field.iframeLink = "https://coub.com/embed/" + field.object.permalink + "?muted=false&autostart=false&originalSize=false&startWithHD=false";
 
@@ -162,8 +165,6 @@ if(window.angular === undefined) {
                 $scope.$on('myCustomEvent', function (event, data) {
 
                 });
-
-                /*console.log($scope.bgLoading);*/
 
                 chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
 
@@ -196,8 +197,6 @@ if(window.angular === undefined) {
 
             } else {
 
-                /*console.log('has last data'/!*, JSON.parse(localStorage.lastData)*!/);*/
-
                 /**
                  * 	Only important events need
                  */
@@ -228,8 +227,6 @@ if(window.angular === undefined) {
                 url: $scope.serverUrl + '/api/v2/channels/notifications_viewed',
                 headers: ''
             }).then(function (response) {
-
-                // console.log(response.data);
 
                 /**
                  * SHIT CODE?
@@ -285,7 +282,6 @@ if(window.angular === undefined) {
             }).then(function (response) {
 
                 $scope.model = response;
-                // console.log(response);
 
             }, function (data) {
                 /*
