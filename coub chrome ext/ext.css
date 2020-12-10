@@ -115,7 +115,7 @@ ul li {
 .coubExt {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: none;
-    width: 250px;
+    width: 300px;
     height: 100%
 }
 
@@ -162,7 +162,7 @@ ul li {
     display: block;
     margin: 0 auto;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 15px;
     border: 1px solid #2BA7A6;
     border-radius: 15px;
 }
@@ -178,6 +178,13 @@ ul li {
     width: auto;
     height: auto;
     box-sizing: content-box;
+    margin-left: 15%;
+}
+
+.cls.bottom {
+    position: relative;
+    top: 5px;
+    line-height: 45px;
 }
 
 .content_lightgray {
@@ -230,6 +237,12 @@ table.head-wrap, table.body-wrap, .content table, .column table {
     color: orangered;
 }
 
+.orangered.view {
+    left: 0px !important;
+    float: left !important;
+    top: 174px !important;
+}
+
 .gray {
     background: #ececec;
     padding-top: 10px;
@@ -267,7 +280,9 @@ table.head-wrap, table.body-wrap, .content table, .column table {
 body > table > tbody > tr > td > div.content.content_lightgray > div:nth-child(1) > a > img {
     float: left;
     margin-right: 8px;
-    border-radius: 25px;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 60px;
 }
 
 body > table > tbody > tr > td > div.content.content_lightgray > div:nth-child(1) > a {
@@ -279,16 +294,41 @@ body > table > tbody > tr > td > div.content.content_lightgray > div > span > p 
     top: 2px;
 }
 
+body > table > tbody > tr > td > div.content.content_lightgray > span {}
+
+body > table > tbody > tr > td > div.channels > select {
+    margin-bottom: 5px;
+    max-width: 75%;
+    min-width: 75%;
+    font-size: inherit;
+    margin-left: 2%;
+}
+
+body > table > tbody > tr > td > div.channels > button {
+    margin-bottom: 5px;
+    max-width: 20%;
+    font-size: inherit;
+    padding: 0;
+}
+
 .recoubExt, .likeExt, body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.orangered.ng-binding {
     position: relative;
-    top: 15px;
-    left: 0px;
     z-index: 111;
     background: orangered;
+    opacity: 0.5;
     color: white;
     border-radius: 15px;
     margin-right: 0px;
     padding: 2px;
+    padding-left: 5px;
+    padding-top: 0px;
+    padding-bottom: 1px;
+}
+
+body > table > tbody > tr > td > div.content.content_lightgray > div > span > hr {
+    position: relative;
+    top: 10px;
+    border: 1px dashed #2BA7A6;
 }
 
 .box {
@@ -297,8 +337,12 @@ body > table > tbody > tr > td > div.content.content_lightgray > div > span > p 
 }
 
 .likeExt {
+    position: relative;
+    top: 20px;
+    left: 0px;
     width: 16px;
     height: 16px;
+    z-index: 222;
 }
 
 .linkExt {
@@ -306,8 +350,12 @@ body > table > tbody > tr > td > div.content.content_lightgray > div > span > p 
 }
 
 .recoubExt {
+    position: relative;
+    top: 20px;
+    left: 0px;
     width: 16px;
     height: 16px;
+    z-index: 222;
 }
 
 .followExt {
@@ -321,6 +369,7 @@ body > table > tbody > tr > td > div.content.content_lightgray > div > span > p 
 }
 
 .coubPic {
+    position: relative;
     width: 100%;
     border-radius: 10px;
 }

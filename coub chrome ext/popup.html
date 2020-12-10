@@ -5,11 +5,11 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" /> 
+
 		<link href="/ext.css" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="angular.min.js"></script>
-        <script type="text/javascript" src="ext.js"></script>
+		<script type="text/javascript" src="/angular.min.js"></script>
+        <script type="text/javascript" src="/ext.js"></script>
 
 		<base target="_blank" />
 	</head>
@@ -34,7 +34,32 @@
 					<a href="http://coub.com/create?source={{serverCTU}}" target="_blank" class="linkExt hotlink">DO COUB FROM THIS TAB 🤘🏻</a>
 
 					<br clear="all" />
-					<br clear="all" />
+
+                    <div class="channels">
+
+                        <div>Channels change coming soon :</div>
+
+                        <select ng-model="channelSelectedList">
+                            <option
+                                    data-ng-repeat="channel in channels track by $index"
+                                    selected="selected"
+                                    value="{{channel.id}}"
+                                    data-ng-if="channel.title == dataUser.current_channel.title && channel.title != ''"
+                                    >
+                                {{channel.title}}
+                            </option>
+                            <option
+                                    data-ng-repeat="channel in channels track by $index"
+                                    value="{{channel.id}}"
+                                    data-ng-if="channel.title != dataUser.current_channel.title && channel.title != ''"
+                                    >
+                                {{channel.title}}
+                            </option>
+                        </select>
+
+                        <button data-ng-click="changeChannel()">change</button>
+
+                    </div>
 
 					<!--NOTIFICATIONS-->
 					<div class="content content_lightgray" ng-cloak>
@@ -82,20 +107,21 @@
 						<!-- MAIN NOTIFICATION SPAN -->
 						<div data-ng-if="dataNotification">
 
-							<span data-ng-repeat="notif in dataNotification | orderBy:'-kind'">
+							<span data-ng-repeat="notif in dataNotification | orderBy:'-id'">
 
 								<p class="box">
 
-                                    <!-- ICONS -->
+                                    <!-- system_notification -->
 									<span data-ng-if="notif.system_notification == rtue"><img class="likeExt" src="icon_connect.png" />!!</span>
 
-									<span data-ng-if="notif.kind == 'like'"><img class="likeExt" src="icon_connect.png" /> </span>
-									<span data-ng-if="notif.kind == 'recoub'"><img class="recoubExt" src="icon_connect.png" /> </span>
-									<span data-ng-if="notif.kind == 'follow'"><img class="followExt" src="icon.png" /> </span>
-									<span data-ng-if="notif.kind == 'new_category'"><img class="otherExt" src="icon.png" /></span>
+									<!--KIND entity_type data-ng-if="notif.kind == 'like'" recoub follow new_category -->
+									<span class="orangered view">{{notif.entity_type}} {{notif.kind}}</span>
 
-									<!--KIND entity_type-->
-									<span class="orangered">{{notif.entity_type}} {{notif.kind}}</span>
+									<!-- more info -->
+									<span data-ng-if="notif.object.likes_count > 0" class="orangered view">{{notif.object.likes_count}} ❤</span>
+									<span data-ng-if="notif.object.recoubs_count > 0" class="orangered view">{{notif.object.recoubs_count}} ♻</span>
+									<span data-ng-if="notif.object.remixes_count > 0" class="orangered view">{{notif.object.remixes_count}} 🔥</span>
+									<span data-ng-if="notif.object.views_count > 0" class="orangered view">{{notif.object.views_count}} 👀</span>
 
 									<!---->
 									<span data-ng-if="
@@ -108,7 +134,6 @@
 									<!-- Object coub -->
 									<span data-ng-if="!notif.object.followers_count">
 										<b>{{$index+1}}. <a href="{{serverUrl}}/view/{{notif.object.permalink}}" target="_blank">{{notif.object.title}}</a></b>
-										({{notif.object.views_count}} 👁)
 									</span>
 
 									<!-- or Object chanell -->
@@ -213,11 +238,13 @@
 
 								</p>
 
+                                <hr/>
+
 							</span>
 
 						</div>
 
-                        <span data-ng-if="dataNotification.length > 0" class="cls">
+                        <span data-ng-if="dataNotification.length > 0" class="cls bottom">
 						    <a href="javascript:void(0)" data-ng-click="markAllReaded()" title="mark all readed" class="linkExt">Mark All Readed</a> 🎈🎈🎈
                         </span>
 
@@ -244,11 +271,13 @@
 						<button data-ng-click="searchFunc()">or search by click button</button>
 
 						<span data-ng-if="model.data.coubs">
-							<p>Search result's:</p>
+
+                            <p>Search result's:</p>
 
 							<div data-ng-repeat="eachItem in model.data.coubs track by $index">
 								<a href="http://coub.com/view/{{eachItem.permalink}}" target="_blank">{{eachItem.title}}</a>
 							</div>
+
 						</span>
 
 					</div>

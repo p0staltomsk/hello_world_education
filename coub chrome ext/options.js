@@ -29,8 +29,6 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
     $scope.loadOptions = function(arg) {
 
-        // console.log(localStorage);
-
         /*
         * Get coub account and channels info
         * */
@@ -43,8 +41,6 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
             $scope.followersPage        = response.data.page;
             $scope.total_pages          = response.data.total_pages;
-
-            /*console.log(response.data.channels);*/
 
             /**
              * 	Only current channet background need
@@ -69,7 +65,6 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
 
             if($scope.total_pages > $scope.followersPage) {
 
-                // $scope.loadOptions($scope.followersPage + 1);
             }
 
         }, function(data) {
@@ -80,8 +75,6 @@ app.controller("OptionsCtrl", ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.loadOptions($scope.followersPage);
-
-    // console.log($scope.users);
 
     /**
      *

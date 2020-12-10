@@ -18,7 +18,6 @@ app.controller(
 	/**
 	 * 	JUST LOG HERE
 	 */
-    // console.log('BackgroundCtrl init');
 
     $scope.page = 1;
     $scope.per_page = 100;
@@ -139,8 +138,6 @@ app.controller(
  *	If u tab visit coub.com change icon
  */
 chrome.runtime.onInstalled.addListener(function() {
-
-    // console.log('chrome.runtime.onInstalled.addListener background.js init');
 
     chrome.runtime.onMessage.addListener(
 

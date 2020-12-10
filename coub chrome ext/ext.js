@@ -39,12 +39,11 @@ if(window.angular === undefined) {
      */
     app.controller("PopupCtrl", ['$scope', '$http', function ($scope, $http)
     {
-        // console.log('PopupCtrl init');
-
         $scope.page                     = 1;
         $scope.per_page                 = 100;
         $scope.method                   = 'GET';
         $scope.methodPost               = 'POST';
+        $scope.methodPut                = 'PUT';
         $scope.serverUrl                = 'http://coub.com';
         $scope.urlNotifications         = 'http:/coub.com/api/v2/notifications';
         $scope.urlAbout                 = 'http:/coub.com/api/v2/users/me';
@@ -54,7 +53,10 @@ if(window.angular === undefined) {
         $scope.dataType                 = 'json';
         $scope.dataNotification         = [];
         $scope.followStatus             = [];
+        $scope.changeChannelData        = [];
         $scope.arrPermalinkData         = [];
+        $scope.channelSelectedList      = {};
+        $scope.channels                 = /*(localStorage.channels)  ? localStorage.channels: */                              [];
         $scope.bgLoading                = true;
         $scope.dataUser                 = (localStorage.dataUser)               ? JSON.parse(localStorage.dataUser)         : [];
         $scope.dataUserIcon             = (localStorage.dataUserIcon)           ? JSON.parse(localStorage.dataUserIcon)     : '';
@@ -69,61 +71,6 @@ if(window.angular === undefined) {
          */
         $scope.loadOptions = function()
         {
-            /*
-            * Get coub account and channels info
-            * */
-            $http({
-                method: $scope.method,
-                url: $scope.urlAbout,
-                dataType: $scope.dataType
-            }).
-            then(function(response) {
-
-                $scope.allChannelsViewCnt = 0;
-
-                /**
-                 * 	Only current channet background need
-                 */
-                angular.forEach(response.data.channels, function (field, key) {
-
-                    $scope.allChannelsViewCnt += field.views_count;
-
-                    if(field.id === response.data.current_channel.id) {
-
-                        $scope.dataChannelCountCnt      = field.simple_coubs_count;
-                        $scope.dataChannelViewsCount    = field.views_count;
-
-                        localStorage.dataChannelCountCnt    = $scope.dataChannelCountCnt;
-                        localStorage.dataChannelViewsCount  = $scope.dataChannelViewsCount;
-
-                        if(field.background_coub != null) {
-
-                            $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
-                            localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
-                        } else {
-                            $scope.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
-                            localStorage.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
-                        }
-                    }
-                });
-
-                localStorage.allChannelsViewCnt = $scope.allChannelsViewCnt;
-
-                /**
-                 *  save user pic and cache
-                 */
-                localStorage.dataUser = JSON.stringify(response.data);
-                $scope.dataUser = response.data;
-
-                localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
-                $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
-
-            }, function(data) {
-                /*
-                * Trow here
-                * */
-            });
-
             /**
              *  GET NOFIFICATIONS
              */
@@ -159,11 +106,6 @@ if(window.angular === undefined) {
 
                         $scope.bgLoading = true;
                     }
-                });
-
-                // listen for the event in the relevant $scope
-                $scope.$on('myCustomEvent', function (event, data) {
-
                 });
 
                 chrome.browserAction.setBadgeText({text: $scope.dataNotification.length.toString()});
@@ -210,6 +152,76 @@ if(window.angular === undefined) {
         }
 
         /**
+         * Load from storage
+         */
+        $scope.loadAbout = function()
+        {
+            /*
+            * Get coub account and channels info
+            * */
+            $http({
+                method: $scope.method,
+                url: $scope.urlAbout,
+                dataType: $scope.dataType
+            }).
+            then(function(response) {
+
+                $scope.allChannelsViewCnt = 0;
+                $scope.channels = [];
+
+                /**
+                 * 	Only current channet background need
+                 */
+                angular.forEach(response.data.channels, function (field, key) {
+
+                    $scope.channels.push(field);
+
+                    $scope.allChannelsViewCnt += field.views_count;
+
+                    if(field.id === response.data.current_channel.id) {
+
+                        $scope.dataChannelCountCnt      = field.simple_coubs_count;
+                        $scope.dataChannelViewsCount    = field.views_count;
+
+                        localStorage.dataChannelCountCnt    = $scope.dataChannelCountCnt;
+                        localStorage.dataChannelViewsCount  = $scope.dataChannelViewsCount;
+
+                        if(field.background_coub != null) {
+
+                            $scope.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                            localStorage.dataChannelBachground = field.background_coub.image_versions.template.replace('%{version}', 'tiny');
+                        } else {
+                            $scope.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                            localStorage.dataChannelBachground = field.timeline_banner_image.replace('%{version}', 'small');
+                        }
+                    }
+                });
+
+                /*localStorage.channels = $scope.channels;*/
+                localStorage.allChannelsViewCnt = $scope.allChannelsViewCnt;
+
+                /**
+                 *  save user pic and cache
+                 */
+                localStorage.dataUser = JSON.stringify(response.data);
+                $scope.dataUser = response.data;
+
+                localStorage.dataUserIcon = JSON.stringify(response.data.current_channel.avatar_versions.template.replace('%{version}', 'small'));
+                $scope.dataUserIcon = response.data.current_channel.avatar_versions.template.replace('%{version}', 'small');
+
+            }, function(data) {
+                /*
+                * Trow here
+                * */
+            });
+        }
+
+        /**
+         *	get about
+         */
+        $scope.loadAbout();
+
+        /**
          *	get storage
          */
         $scope.loadOptions();
@@ -243,8 +255,9 @@ if(window.angular === undefined) {
             });
         }
 
-        /**
-         *  follow to user
+        /**         *
+         * @param $channelId
+         * @param $userId
          */
         $scope.follow = function ($channelId, $userId)
         {
@@ -264,6 +277,30 @@ if(window.angular === undefined) {
             }, function (data) {
 
                 $scope.followStatus = [$userId, "false"];
+            });
+        }
+
+        /**         *
+         * @param $channelId
+         */
+        $scope.changeChannel = function ()
+        {
+            var $channelId = $scope.channelSelectedList;
+
+            /**
+             *  DO change channel
+             */
+            $http({
+                method: $scope.methodPut,
+                url: $scope.serverUrl + '/api/v2/users/change_channel?channel_id=' + $channelId,
+                headers: ''
+            }).then(function (response) {
+
+                $scope.loadAbout();
+
+            }, function (data) {
+
+                $scope.loadAbout();
             });
         }
 
