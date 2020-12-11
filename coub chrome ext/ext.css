@@ -238,9 +238,7 @@ table.head-wrap, table.body-wrap, .content table, .column table {
 }
 
 .orangered.view {
-    left: 0px !important;
-    float: left !important;
-    top: 174px !important;
+    display: inline-block;
 }
 
 .gray {
@@ -311,7 +309,8 @@ body > table > tbody > tr > td > div.channels > button {
     padding: 0;
 }
 
-.recoubExt, .likeExt, body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.orangered.ng-binding {
+body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.orangered.view.ng-binding,
+body > table > tbody > tr > td > div.content.content_lightgray > div > span > p > span.more_info > span.orangered {
     position: relative;
     z-index: 111;
     background: orangered;
@@ -332,8 +331,15 @@ body > table > tbody > tr > td > div.content.content_lightgray > div > span > hr
 }
 
 .box {
+    position: relative;
     padding: 0;
     margin: 0;
+}
+
+.more_info {
+    position: relative;
+    top: -24px;
+    left: 4px;
 }
 
 .likeExt {
